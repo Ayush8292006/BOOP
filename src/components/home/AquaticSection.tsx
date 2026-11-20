@@ -1,17 +1,23 @@
 import React from 'react';
 import { useShop } from '../../context/ShopContext';
 import { ArrowRight, Droplets } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const AquaticSection: React.FC = () => {
   const { navigateToShopWithFilter } = useShop();
 
   return (
-    <section className="py-12 sm:py-16 bg-[#FFFAF4]">
+    <section className="py-12 sm:py-20 bg-[#FFFAF4] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Full-width Architectural Banner Container */}
-        <div className="relative rounded-3xl overflow-hidden shadow-elevation bg-[#031E2A] border border-[#0E7490]/40 group">
-          
+        {/* Full-width Architectural Banner Container with Scroll Reveal */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded-3xl overflow-hidden shadow-elevation bg-[#031E2A] border border-[#0E7490]/40 group"
+        >
           {/* Background image overlay */}
           <div className="absolute inset-0 z-0">
             <img
@@ -21,8 +27,18 @@ export const AquaticSection: React.FC = () => {
               loading="lazy"
             />
             {/* Deep elegant navy-to-transparent gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#031E2A] via-[#031E2A]/85 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#031E2A] via-[#031E2A]/90 to-transparent" />
           </div>
+
+          {/* Shimmering aquatic wave aura */}
+          <motion.div
+            animate={{
+              opacity: [0.15, 0.3, 0.15],
+              scale: [1, 1.15, 1],
+            }}
+            transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+            className="absolute top-0 right-10 w-96 h-96 rounded-full bg-[#06B6D4] blur-[120px] pointer-events-none"
+          />
 
           {/* Editorial Content */}
           <div className="relative z-10 px-6 py-12 sm:px-12 sm:py-20 md:py-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
@@ -49,18 +65,20 @@ export const AquaticSection: React.FC = () => {
 
             {/* Right Action Block */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-shrink-0">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => navigateToShopWithFilter({ pet: 'Aquatics' })}
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest text-[#031E2A] bg-white hover:bg-[#38BDF8] shadow-luxury transition-all duration-300"
               >
                 <span>Shop Aquatic Range</span>
                 <ArrowRight className="w-4 h-4 text-[#031E2A] group-hover:translate-x-1 transition-transform" />
-              </button>
+              </motion.button>
             </div>
 
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

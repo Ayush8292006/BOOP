@@ -1,6 +1,7 @@
 import React from 'react';
 import { useShop } from '../../context/ShopContext';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const Hero: React.FC = () => {
   const { navigateToShopWithFilter, setActiveTab } = useShop();
@@ -10,11 +11,15 @@ export const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Large Asymmetrical Editorial Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column: Bold Editorial Typography & Actions (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 space-y-6 text-left"
+          >
             {/* Fine Overline */}
             <div className="inline-flex items-center gap-3">
               <span className="w-8 h-px bg-caramel" />
@@ -36,20 +41,24 @@ export const Hero: React.FC = () => {
 
             {/* Clean Architectural CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => navigateToShopWithFilter({ pet: 'All' })}
                 className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest text-[#F5E9D8] bg-chocolate hover:bg-chocolate-hover shadow-luxury transition-all duration-300"
               >
                 <span>Explore Collection</span>
                 <ArrowRight className="w-4 h-4 text-caramel group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveTab('about')}
                 className="inline-flex items-center justify-center px-7 py-4 rounded-full text-xs font-semibold uppercase tracking-widest text-chocolate bg-white hover:bg-beige-light border border-[#E8DBC9] transition-colors"
               >
                 The Brand Story
-              </button>
+              </motion.button>
             </div>
 
             {/* Minimalist Trust Indicator Strip */}
@@ -68,10 +77,15 @@ export const Hero: React.FC = () => {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Significant Commercial Art-Directed Photography (5 cols) */}
-          <div className="lg:col-span-5 relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 relative"
+          >
             <div className="relative mx-auto">
               
               {/* Main Image Frame with Architectural Sharpness and Fine Border */}
@@ -84,10 +98,10 @@ export const Hero: React.FC = () => {
                 />
 
                 {/* Subtle vignette gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-chocolate/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-chocolate/50 via-transparent to-transparent pointer-events-none" />
 
                 {/* Editorial Caption Tag in Bottom Corner */}
-                <div className="absolute bottom-5 left-5 right-5 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-subtle flex items-center justify-between">
+                <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-subtle flex items-center justify-between">
                   <div>
                     <p className="text-[10px] uppercase font-bold tracking-widest text-caramel">
                       Care &amp; Nutrition
@@ -104,7 +118,7 @@ export const Hero: React.FC = () => {
               </div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

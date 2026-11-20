@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, Truck, RotateCcw, Headphones, Heart } from 'lucide-react';
 import { useShop } from '../../context/ShopContext';
+import { motion } from 'framer-motion';
 
 export const TrustStrip: React.FC = () => {
   const { setPolicyModal, setContactModalOpen } = useShop();
@@ -36,7 +37,7 @@ export const TrustStrip: React.FC = () => {
   ];
 
   return (
-    <section className="bg-white border-b border-[#E8DBC9] py-8">
+    <section className="bg-white border-b border-[#E8DBC9] py-8 sm:py-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 divide-y lg:divide-y-0 lg:divide-x divide-[#E8DBC9]/60">
           {benefits.map((item, idx) => {
@@ -44,8 +45,12 @@ export const TrustStrip: React.FC = () => {
             const isClickable = !!item.onClick;
 
             return (
-              <div
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ delay: idx * 0.08, duration: 0.6 }}
                 onClick={item.onClick}
                 className={`pt-4 lg:pt-0 lg:px-6 flex items-start gap-3.5 transition-opacity ${
                   isClickable ? 'cursor-pointer hover:opacity-75' : ''
@@ -62,7 +67,7 @@ export const TrustStrip: React.FC = () => {
                     {item.subtitle}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

@@ -1,17 +1,23 @@
 import React from 'react';
 import { useShop } from '../../context/ShopContext';
 import { Mail, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const CollabBanner: React.FC = () => {
   const { setContactModalOpen } = useShop();
 
   return (
-    <section className="py-12 sm:py-20 bg-[#FFFAF4]">
+    <section className="py-12 sm:py-20 bg-[#FFFAF4] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Elegant Architectural Banner */}
-        <div className="relative rounded-3xl overflow-hidden bg-white border border-[#E8DBC9] p-8 sm:p-14 shadow-luxury">
-          
+        {/* Elegant Architectural Banner with Scroll Reveal */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded-3xl overflow-hidden bg-white border border-[#E8DBC9] p-8 sm:p-14 shadow-luxury"
+        >
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative z-10">
             
             {/* Left Content */}
@@ -29,19 +35,21 @@ export const CollabBanner: React.FC = () => {
 
             {/* Right Action */}
             <div className="flex items-center gap-4 flex-shrink-0">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => setContactModalOpen(true)}
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest text-[#F5E9D8] bg-chocolate hover:bg-chocolate-hover shadow-luxury transition-all duration-300"
               >
                 <Mail className="w-4 h-4 text-caramel" />
                 <span>Drop Us an Email</span>
                 <ArrowRight className="w-4 h-4 text-caramel group-hover:translate-x-1 transition-transform" />
-              </button>
+              </motion.button>
             </div>
 
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -3,11 +3,14 @@ import { ShopProvider, useShop } from './context/ShopContext';
 import { AnnouncementBar } from './components/common/AnnouncementBar';
 import { Navbar } from './components/common/Navbar';
 import { WelcomeScreen } from './components/common/WelcomeScreen';
+import { MobileStoryBar } from './components/home/MobileStoryBar';
+import { MobileBottomBar } from './components/common/MobileBottomBar';
 import { Hero } from './components/home/Hero';
 import { TrustStrip } from './components/home/TrustStrip';
 import { ShopByPet } from './components/home/ShopByPet';
 import { AquaticSection } from './components/home/AquaticSection';
 import { ShopByCategory } from './components/home/ShopByCategory';
+import { FeaturedProducts } from './components/home/FeaturedProducts';
 import { PromoBanners } from './components/home/PromoBanners';
 import { ShopByBrands } from './components/home/ShopByBrands';
 import { CollabBanner } from './components/home/CollabBanner';
@@ -28,17 +31,20 @@ const AppContent: React.FC = () => {
   const { activeTab } = useShop();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFFAF4] text-[#3B160D]">
-      {/* 1. First Visit Welcome Screen */}
+    <div className="min-h-screen flex flex-col bg-[#FFFAF4] text-[#35150E] pb-16 lg:pb-0">
+      {/* 1. Cinematic Luxury Welcome Screen */}
       <WelcomeScreen />
 
-      {/* 2. Top Announcement Bar */}
+      {/* 2. Top Minimalist Announcement Bar */}
       <AnnouncementBar />
 
       {/* 3. Sticky Main Navigation */}
       <Navbar />
 
-      {/* 4. Active Main Page View */}
+      {/* 4. Mobile Quick Stories/Category Portal Bar */}
+      {activeTab === 'home' && <MobileStoryBar />}
+
+      {/* 5. Active Page View */}
       <main className="flex-1">
         {activeTab === 'home' && (
           <>
@@ -47,6 +53,7 @@ const AppContent: React.FC = () => {
             <ShopByPet />
             <AquaticSection />
             <ShopByCategory />
+            <FeaturedProducts />
             <PromoBanners />
             <ShopByBrands />
             <CollabBanner />
@@ -58,10 +65,13 @@ const AppContent: React.FC = () => {
         {activeTab === 'about' && <AboutPage />}
       </main>
 
-      {/* 5. Rich Chocolate Footer */}
+      {/* 6. Rich Chocolate Footer */}
       <Footer />
 
-      {/* 6. Drawers & Modals */}
+      {/* 7. Native Mobile iOS/Android Bottom App Dock */}
+      <MobileBottomBar />
+
+      {/* 8. Drawers & Modals */}
       <CartDrawer />
       <WishlistDrawer />
       <SearchModal />
@@ -71,7 +81,7 @@ const AppContent: React.FC = () => {
       <PetProfileModal />
       <ContactModal />
 
-      {/* 7. Action Toast */}
+      {/* 9. Action Toast */}
       <Toast />
     </div>
   );

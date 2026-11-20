@@ -2,6 +2,7 @@ import React from 'react';
 import { useShop } from '../../context/ShopContext';
 import { ProductCategory } from '../../types';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface CategoryShowcaseItem {
   id: ProductCategory;
@@ -65,11 +66,17 @@ export const ShopByCategory: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-white border-b border-[#E8DBC9]">
+    <section className="py-16 sm:py-24 bg-white border-b border-[#E8DBC9] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4 border-b border-[#E8DBC9] pb-6">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 gap-4 border-b border-[#E8DBC9] pb-6"
+        >
           <div>
             <span className="text-[11px] uppercase tracking-ultra font-semibold text-caramel block mb-2">
               Curated Essentials
@@ -78,18 +85,32 @@ export const ShopByCategory: React.FC = () => {
               Shop by Category
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-chocolate/70 max-w-md font-light leading-relaxed">
-            From precision veterinarian-approved nutrition to orthopedic memory-foam resting systems, explore our full product portfolio.
-          </p>
-        </div>
+          <div className="flex items-center justify-between md:justify-end gap-4">
+            <p className="text-xs sm:text-sm text-chocolate/70 max-w-md font-light leading-relaxed">
+              From precision veterinarian-approved nutrition to orthopedic memory-foam resting systems, explore our full product portfolio.
+            </p>
+            {/* Mobile swipe hint */}
+            <span className="lg:hidden text-[10px] font-bold uppercase tracking-widest text-caramel flex items-center gap-1">
+              Swipe &rarr;
+            </span>
+          </div>
+        </motion.div>
 
-        {/* 8 Balanced Architectural Category Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat) => (
-            <div
+        {/* Responsive Layout:
+            On Mobile: Smooth Horizontal Snap Carousel (overflow-x-auto snap-x)
+            On Desktop: Balanced 4-Column Grid
+        */}
+        <div className="flex lg:grid lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pb-4 lg:pb-0 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
+          {categories.map((cat, idx) => (
+            <motion.div
               key={cat.id}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ delay: idx * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
               onClick={() => navigateToShopWithFilter({ category: cat.id })}
-              className="group cursor-pointer bg-[#FFFAF4] rounded-2xl overflow-hidden border border-[#E8DBC9] hover:border-caramel transition-all duration-300 shadow-subtle hover:shadow-luxury flex flex-col"
+              className="snap-center flex-shrink-0 w-[65vw] sm:w-[240px] lg:w-auto group cursor-pointer bg-[#FFFAF4] rounded-2xl overflow-hidden border border-[#E8DBC9] hover:border-caramel transition-all duration-300 shadow-subtle hover:shadow-luxury flex flex-col"
             >
               {/* Product Image Frame */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F5E9D8]">
@@ -116,7 +137,7 @@ export const ShopByCategory: React.FC = () => {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
