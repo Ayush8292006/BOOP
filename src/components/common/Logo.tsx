@@ -40,11 +40,11 @@ export const Logo: React.FC<LogoProps> = ({
 
       {showTagline && (
         <span
-          className={`font-handwriting tracking-wide mt-1 ${sizeMap[size].text} ${
+          className={`font-display uppercase tracking-widest font-semibold mt-1.5 ${sizeMap[size].text} ${
             variant === 'dark' ? 'text-beige' : 'text-caramel'
           }`}
         >
-          A Little Boop &amp; Lot of Love ❤️
+          A Little Boop &amp; Lot of Love
         </span>
       )}
     </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useShop } from '../../context/ShopContext';
 import { Logo } from './Logo';
-import { ArrowRight, Sparkles, Heart } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export const WelcomeScreen: React.FC = () => {
   const { welcomeScreenVisible, setWelcomeScreenVisible } = useShop();
@@ -11,17 +11,17 @@ export const WelcomeScreen: React.FC = () => {
   useEffect(() => {
     if (!welcomeScreenVisible) return;
 
-    // Sequence stages
-    const timer1 = setTimeout(() => setAnimStage(1), 150);  // Bg + Logo
-    const timer2 = setTimeout(() => setAnimStage(2), 500);  // Tagline
-    const timer3 = setTimeout(() => setAnimStage(3), 850);  // Pet photography
-    const timer4 = setTimeout(() => setAnimStage(4), 1200); // Welcome text + CTA
+    // Cinematic choreographed timing sequence
+    const t1 = setTimeout(() => setAnimStage(1), 200);  // Subtle warm ambient light & logo reveal
+    const t2 = setTimeout(() => setAnimStage(2), 700);  // Tagline reveal
+    const t3 = setTimeout(() => setAnimStage(3), 1100); // Supporting statement & photo composition
+    const t4 = setTimeout(() => setAnimStage(4), 1500); // CTA entrance
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
     };
   }, [welcomeScreenVisible]);
 
@@ -37,7 +37,7 @@ export const WelcomeScreen: React.FC = () => {
     setTimeout(() => {
       setWelcomeScreenVisible(false);
       setIsExiting(false);
-    }, 600);
+    }, 700);
   };
 
   return (
@@ -45,112 +45,136 @@ export const WelcomeScreen: React.FC = () => {
       role="dialog"
       aria-modal="true"
       aria-label="Welcome to BOOP STORE"
-      className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto px-4 py-8 bg-[#29150F] text-[#FFFAF4] transition-all duration-700 ${
-        isExiting ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
+      className={`fixed inset-0 z-[9999] flex flex-col justify-between items-center px-6 py-8 sm:py-12 bg-[#29100B] text-[#FFFAF4] transition-opacity duration-700 ease-out select-none overflow-hidden ${
+        isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
-      style={{
-        backgroundImage: `radial-gradient(circle at 50% 30%, rgba(183, 122, 69, 0.18) 0%, rgba(41, 21, 15, 0.98) 70%)`
-      }}
     >
-      {/* Skip button top right */}
-      <button
-        onClick={handleDismiss}
-        className="absolute top-6 right-6 z-20 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium tracking-wide text-[#F5E9D8] bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all duration-200 border border-white/15"
-      >
-        Skip to Store &rarr;
-      </button>
+      {/* Very subtle warm cinematic radial illumination */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% 40%, rgba(183, 122, 69, 0.12) 0%, rgba(41, 16, 11, 0.98) 75%)'
+        }}
+      />
 
-      {/* Background ambient warm glows */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#B77A45]/20 blur-3xl pointer-events-none animate-pulse"></div>
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[#A6AD8A]/15 blur-3xl pointer-events-none"></div>
+      {/* Subtle luxury hairline texture */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(#F5E9D8 1px, transparent 1px)',
+          backgroundSize: '24px 24px'
+        }}
+      />
 
-      <div className="relative z-10 max-w-2xl w-full mx-auto text-center flex flex-col items-center justify-center">
-        
-        {/* Stage 1: Brand Logo */}
-        <div
-          className={`transition-all duration-700 ease-out transform ${
-            animStage >= 1
-              ? 'opacity-100 translate-y-0 scale-100'
-              : 'opacity-0 translate-y-6 scale-90'
+      {/* Top Header: Brand Association & Skip Action */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex items-center justify-between">
+        <span 
+          className={`text-[11px] uppercase tracking-ultra text-[#F5E9D8]/60 font-medium transition-all duration-700 ${
+            animStage >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
           }`}
         >
-          <div className="p-3 inline-block rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-2xl mb-4">
-            <Logo variant="dark" size="xl" />
+          A Brand by Volga Life Biosciences
+        </span>
+
+        <button
+          onClick={handleDismiss}
+          className={`text-[11px] uppercase tracking-widest text-[#F5E9D8]/60 hover:text-white transition-all duration-300 py-1.5 px-3 rounded border border-white/10 hover:border-white/30 backdrop-blur-sm ${
+            animStage >= 1 ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          Skip Intro
+        </button>
+      </div>
+
+      {/* Center Cinematic Content */}
+      <div className="relative z-10 max-w-xl w-full mx-auto text-center flex flex-col items-center my-auto py-8">
+        
+        {/* Stage 1 & 2: Original BOOP STORE Logo with subtle light halo */}
+        <div
+          className={`transition-all duration-1000 ease-out transform ${
+            animStage >= 1
+              ? 'opacity-100 scale-100 translate-y-0'
+              : 'opacity-0 scale-95 translate-y-4'
+          }`}
+        >
+          <div className="relative mb-6">
+            <div className="absolute -inset-4 bg-[#B77A45]/15 rounded-full blur-2xl pointer-events-none" />
+            <img
+              src="/images/boop-logo-white.png"
+              alt="BOOP STORE"
+              className="h-20 sm:h-24 md:h-28 w-auto object-contain drop-shadow-2xl relative z-10"
+            />
           </div>
         </div>
 
-        {/* Stage 2: Tagline */}
+        {/* Stage 3: Fine hairline divider */}
         <div
-          className={`transition-all duration-700 delay-100 ease-out transform ${
+          className={`w-12 h-px bg-[#B77A45]/40 my-3 transition-all duration-700 ${
+            animStage >= 2 ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+          }`}
+        />
+
+        {/* Tagline */}
+        <div
+          className={`transition-all duration-700 ease-out transform ${
             animStage >= 2
               ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
+              : 'opacity-0 translate-y-3'
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B77A45]/30 border border-[#B77A45]/40 text-[#F5E9D8] text-xs uppercase tracking-widest font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-[#F5E9D8]" />
-            A Brand by Volga Life Biosciences
-          </div>
-
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#FFFAF4] tracking-tight leading-tight">
-            A Little Boop &amp; Lot of Love <span className="text-red-400 inline-block animate-bounce">❤️</span>
+          <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#FFFAF4]">
+            A Little Boop &amp; Lot of Love.
           </h1>
         </div>
 
-        {/* Stage 3: Beautiful realistic pet photography */}
+        {/* Supporting statement */}
         <div
-          className={`w-full max-w-md mx-auto my-6 sm:my-8 transition-all duration-700 ease-out transform ${
+          className={`transition-all duration-700 delay-100 ease-out transform mt-3 ${
             animStage >= 3
-              ? 'opacity-100 translate-y-0 scale-100'
-              : 'opacity-0 translate-y-6 scale-95'
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-3'
           }`}
         >
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 group">
-            <img
-              src="/images/welcome-pets.jpg"
-              alt="Adorable Golden Retriever and Kitten welcoming you to BOOP STORE"
-              className="w-full h-48 sm:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#29150F]/80 via-transparent to-transparent flex items-end p-4">
-              <div className="flex items-center gap-2 text-xs text-[#F5E9D8] font-medium">
-                <Heart className="w-4 h-4 text-[#B77A45] fill-current" />
-                <span>Dedicated to every wag, purr, chirp &amp; swim.</span>
-              </div>
-            </div>
-          </div>
+          <p className="text-xs sm:text-sm text-[#F5E9D8]/75 font-body tracking-wider uppercase font-light max-w-md mx-auto leading-relaxed">
+            Thoughtfully Curated. Genuinely Trusted. Made for Every Pet.
+          </p>
         </div>
 
-        {/* Stage 4: Welcome message & CTA */}
+        {/* High-fashion, luxury editorial pet photography campaign preview */}
         <div
-          className={`space-y-6 max-w-lg transition-all duration-700 ease-out transform ${
-            animStage >= 4
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
+          className={`w-full max-w-md mx-auto my-6 rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-1000 ease-out transform ${
+            animStage >= 3
+              ? 'opacity-100 translate-y-0 scale-100'
+              : 'opacity-0 translate-y-6 scale-98'
           }`}
         >
-          <p className="text-sm sm:text-base text-[#F5E9D8]/90 font-light leading-relaxed">
-            Welcome to India's growing pet-care haven. Grounded in decades of aquatic expertise, now thoughtfully curated for all your beloved companions.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <button
-              onClick={handleDismiss}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full text-base font-bold text-[#29150F] bg-gradient-to-r from-[#F5E9D8] via-[#FFFAF4] to-[#F5E9D8] hover:from-white hover:to-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200"
-            >
-              <span>Explore Store</span>
-              <ArrowRight className="w-5 h-5 text-[#3B160D]" />
-            </button>
-
-            <button
-              onClick={handleDismiss}
-              className="w-full sm:w-auto px-5 py-3 rounded-full text-sm font-medium text-[#F5E9D8]/80 hover:text-white hover:bg-white/5 transition-colors"
-            >
-              Browse Catalog
-            </button>
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#35150E]">
+            <img
+              src="/images/hero-pets.jpg"
+              alt="Curated companionship"
+              className="w-full h-full object-cover object-center filter brightness-95 contrast-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#29100B] via-transparent to-transparent opacity-80" />
           </div>
         </div>
 
       </div>
+
+      {/* Bottom Minimalist Luxury CTA */}
+      <div 
+        className={`relative z-10 w-full text-center pb-2 transition-all duration-700 ease-out transform ${
+          animStage >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
+        <button
+          onClick={handleDismiss}
+          className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-xs uppercase tracking-ultra font-semibold text-[#FFFAF4] bg-white/5 hover:bg-[#B77A45] border border-white/15 hover:border-[#B77A45] shadow-luxury transition-all duration-300"
+        >
+          <span>Explore The Collection</span>
+          <ArrowRight className="w-4 h-4 text-[#F5E9D8] group-hover:translate-x-1 transition-transform duration-300" />
+        </button>
+      </div>
+
     </div>
   );
 };

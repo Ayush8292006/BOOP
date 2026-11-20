@@ -10,8 +10,7 @@ import {
   CheckCircle2,
   ShieldCheck,
   Truck,
-  RotateCcw,
-  Sparkles
+  RotateCcw
 } from 'lucide-react';
 
 export const ProductDetailModal: React.FC = () => {
@@ -27,7 +26,6 @@ export const ProductDetailModal: React.FC = () => {
     ? product.additionalImages
     : [product.image];
 
-  // Related products from same pet or product category
   const related = PRODUCTS.filter(
     (p) => (p.petCategory === product.petCategory || p.category === product.category) && p.id !== product.id
   ).slice(0, 3);
@@ -47,49 +45,47 @@ export const ProductDetailModal: React.FC = () => {
       />
 
       {/* Modal Dialog */}
-      <div className="relative bg-[#FFFAF4] rounded-3xl max-w-4xl w-full shadow-2xl border border-beige-border overflow-hidden z-10 max-h-[90vh] flex flex-col">
+      <div className="relative bg-[#FFFAF4] rounded-3xl max-w-4xl w-full shadow-elevation border border-[#E8DBC9] overflow-hidden z-10 max-h-[90vh] flex flex-col">
         
         {/* Modal Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-white/90 text-chocolate hover:bg-chocolate hover:text-beige flex items-center justify-center transition-all shadow-md"
+          className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/90 text-chocolate hover:bg-chocolate hover:text-white flex items-center justify-center transition-all shadow-subtle"
           aria-label="Close dialog"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {/* Modal Body */}
-        <div className="overflow-y-auto p-6 sm:p-8 space-y-8">
+        <div className="overflow-y-auto p-6 sm:p-10 space-y-8">
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
             
             {/* Left: Image Gallery (5 cols) */}
             <div className="md:col-span-5 space-y-3">
-              {/* Primary Image */}
-              <div className="w-full aspect-square rounded-2xl overflow-hidden bg-white border border-beige-border shadow-inner relative flex items-center justify-center">
+              <div className="w-full aspect-square rounded-2xl overflow-hidden bg-white border border-[#E8DBC9] shadow-subtle relative flex items-center justify-center">
                 <img
                   src={images[activeImageIndex] || product.image}
                   alt={product.title}
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center filter brightness-98"
                 />
                 {product.discountPercentage && (
-                  <div className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
+                  <div className="absolute top-3 left-3 bg-chocolate text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-sm">
                     {product.discountPercentage}% OFF
                   </div>
                 )}
               </div>
 
-              {/* Thumbnail Selector */}
               {images.length > 1 && (
                 <div className="flex gap-2">
                   {images.map((img, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActiveImageIndex(idx)}
-                      className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${
+                      className={`w-16 h-16 rounded-xl overflow-hidden border transition-all ${
                         activeImageIndex === idx
-                          ? 'border-caramel ring-2 ring-caramel/30 scale-105'
-                          : 'border-beige-border opacity-70 hover:opacity-100'
+                          ? 'border-chocolate ring-2 ring-chocolate/20'
+                          : 'border-[#E8DBC9] opacity-70 hover:opacity-100'
                       }`}
                     >
                       <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
@@ -102,53 +98,43 @@ export const ProductDetailModal: React.FC = () => {
             {/* Right: Product Meta & Purchase (7 cols) */}
             <div className="md:col-span-7 space-y-4">
               
-              {/* Brand, Pet Category & Badges */}
               <div className="flex items-center gap-2">
-                <span className="text-xs uppercase font-extrabold text-caramel tracking-wider bg-caramel/10 px-2.5 py-0.5 rounded-full">
+                <span className="text-[10px] uppercase font-bold text-caramel tracking-ultra">
                   {product.brand}
                 </span>
-                <span className="text-xs text-chocolate/50 font-medium">
-                  • {product.petCategory} ({product.category})
+                <span className="text-xs text-chocolate/40 font-medium">
+                  &bull; {product.petCategory} ({product.category})
                 </span>
               </div>
 
-              {/* Title */}
-              <h2 className="font-display font-extrabold text-xl sm:text-2xl text-chocolate leading-tight">
+              <h2 className="font-display font-bold text-xl sm:text-2xl text-chocolate leading-tight">
                 {product.title}
               </h2>
 
-              {/* Price Row */}
               <div className="flex items-baseline gap-3 py-1">
-                <span className="font-display font-black text-2xl sm:text-3xl text-chocolate">
+                <span className="font-display font-extrabold text-2xl sm:text-3xl text-chocolate">
                   ₹{product.price.toLocaleString('en-IN')}
                 </span>
                 {product.originalPrice && (
-                  <span className="text-base text-chocolate/50 line-through">
+                  <span className="text-base text-chocolate/40 line-through">
                     ₹{product.originalPrice.toLocaleString('en-IN')}
-                  </span>
-                )}
-                {product.discountPercentage && (
-                  <span className="text-xs font-bold text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                    Save ₹{(product.originalPrice! - product.price).toLocaleString('en-IN')}
                   </span>
                 )}
               </div>
 
-              {/* Description */}
               <p className="text-sm text-chocolate/80 leading-relaxed font-light">
                 {product.description}
               </p>
 
-              {/* Key Features Bullet points */}
               {product.features && product.features.length > 0 && (
                 <div className="space-y-1.5 pt-2">
-                  <h4 className="text-xs font-bold text-chocolate uppercase tracking-wider">
-                    Key Highlights:
+                  <h4 className="text-[10px] font-bold text-chocolate uppercase tracking-ultra">
+                    Key Specifications:
                   </h4>
                   <ul className="space-y-1">
                     {product.features.map((feat, fIdx) => (
                       <li key={fIdx} className="flex items-start gap-2 text-xs text-chocolate/75">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-sage-dark flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-caramel flex-shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -156,64 +142,60 @@ export const ProductDetailModal: React.FC = () => {
                 </div>
               )}
 
-              {/* Quantity Selector & Action Buttons */}
-              <div className="pt-4 border-t border-beige-border space-y-4">
-                <div className="flex flex-wrap items-center gap-4">
-                  {/* Quantity Counter */}
-                  <div className="flex items-center border border-beige-border rounded-xl bg-white p-1">
+              {/* Purchase Bar */}
+              <div className="pt-4 border-t border-[#E8DBC9] space-y-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center border border-[#E8DBC9] rounded-lg bg-white p-1">
                     <button
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-chocolate hover:bg-beige-light transition-colors"
+                      className="w-7 h-7 rounded flex items-center justify-center text-chocolate hover:bg-beige-light transition-colors"
                       disabled={quantity <= 1}
                     >
-                      <Minus className="w-3.5 h-3.5" />
+                      <Minus className="w-3 h-3" />
                     </button>
-                    <span className="w-10 text-center text-sm font-bold text-chocolate">
+                    <span className="w-8 text-center text-xs font-bold text-chocolate">
                       {quantity}
                     </span>
                     <button
                       onClick={() => setQuantity((q) => q + 1)}
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-chocolate hover:bg-beige-light transition-colors"
+                      className="w-7 h-7 rounded flex items-center justify-center text-chocolate hover:bg-beige-light transition-colors"
                     >
-                      <Plus className="w-3.5 h-3.5" />
+                      <Plus className="w-3 h-3" />
                     </button>
                   </div>
 
-                  {/* Add to Cart CTA */}
                   <button
                     onClick={() => {
                       addToCart(product, quantity);
                       handleClose();
                     }}
-                    className="flex-1 min-w-[180px] inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-chocolate text-beige hover:bg-chocolate-light font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-95"
+                    className="flex-1 min-w-[170px] inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-chocolate text-[#F5E9D8] hover:bg-chocolate-hover font-bold text-xs uppercase tracking-wider shadow-luxury transition-all active:scale-98"
                   >
-                    <ShoppingBag className="w-4 h-4 text-caramel-light" />
-                    <span>Add to Cart • ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
+                    <ShoppingBag className="w-3.5 h-3.5 text-caramel" />
+                    <span>Add to Bag &bull; ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
                   </button>
 
-                  {/* Wishlist Toggle */}
                   <button
                     onClick={() => toggleWishlist(product.id)}
-                    className={`w-11 h-11 rounded-2xl border flex items-center justify-center transition-all ${
+                    className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-all ${
                       wishlisted
-                        ? 'bg-red-50 border-red-200 text-red-500'
-                        : 'bg-white border-beige-border text-chocolate hover:text-red-500'
+                        ? 'bg-chocolate text-white border-chocolate'
+                        : 'bg-white border-[#E8DBC9] text-chocolate hover:text-caramel'
                     }`}
                     title={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
                   >
-                    <Heart className={`w-5 h-5 ${wishlisted ? 'fill-current' : ''}`} />
+                    <Heart className={`w-4 h-4 ${wishlisted ? 'fill-current' : ''}`} />
                   </button>
                 </div>
 
-                {/* Service guarantees */}
-                <div className="grid grid-cols-3 gap-2 pt-2 text-[11px] text-chocolate/70">
+                <div className="grid grid-cols-3 gap-2 pt-2 text-[11px] text-chocolate/70 uppercase tracking-wider font-medium">
                   <div className="flex items-center gap-1.5">
                     <Truck className="w-3.5 h-3.5 text-caramel" />
-                    <span>Pan India Delivery</span>
+                    <span>Pan India</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-caramel" />
-                    <span>100% Authentic</span>
+                    <span>100% Genuine</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <RotateCcw className="w-3.5 h-3.5 text-caramel" />
@@ -227,11 +209,11 @@ export const ProductDetailModal: React.FC = () => {
 
           </div>
 
-          {/* Related Products Section */}
+          {/* Related Products */}
           {related.length > 0 && (
-            <div className="pt-6 border-t border-beige-border space-y-4">
-              <h3 className="font-display font-bold text-lg text-chocolate">
-                You May Also Like
+            <div className="pt-6 border-t border-[#E8DBC9] space-y-4">
+              <h3 className="font-display font-bold text-base text-chocolate uppercase tracking-wider">
+                Complementary Curations
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {related.map((rel) => (
@@ -242,15 +224,15 @@ export const ProductDetailModal: React.FC = () => {
                       setQuantity(1);
                       setActiveImageIndex(0);
                     }}
-                    className="p-3 bg-white rounded-2xl border border-beige-border hover:border-caramel/40 cursor-pointer flex items-center gap-3 group transition-all"
+                    className="p-3 bg-white rounded-xl border border-[#E8DBC9] hover:border-caramel cursor-pointer flex items-center gap-3 transition-colors"
                   >
                     <img
                       src={rel.image}
                       alt={rel.title}
-                      className="w-14 h-14 object-cover rounded-xl bg-beige-light group-hover:scale-105 transition-transform"
+                      className="w-12 h-12 object-cover rounded-lg bg-[#F5E9D8]"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="text-[10px] text-caramel font-semibold uppercase">{rel.brand}</p>
+                      <p className="text-[10px] text-caramel font-bold uppercase">{rel.brand}</p>
                       <h5 className="text-xs font-bold text-chocolate truncate">{rel.title}</h5>
                       <p className="text-xs font-bold text-chocolate mt-0.5">₹{rel.price.toLocaleString('en-IN')}</p>
                     </div>

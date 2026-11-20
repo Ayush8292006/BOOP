@@ -8,71 +8,57 @@ export default {
     extend: {
       colors: {
         chocolate: {
-          DEFAULT: '#3B160D',
-          dark: '#29150F',
-          light: '#542416',
-          hover: '#4C1F13',
-          border: '#5C2D20',
+          deep: '#35150E',
+          espresso: '#29100B',
+          DEFAULT: '#35150E',
+          brown: '#3B160D',
+          hover: '#29100B',
+          subtle: '#4A231A',
         },
-        espresso: '#29150F',
+        espresso: '#29100B',
         beige: {
           light: '#FBF5ED',
           DEFAULT: '#F5E9D8',
-          dark: '#E8D5BF',
-          border: '#E2CEB7',
+          dark: '#E7D7C2',
+          border: '#E8DBC9',
         },
         ivory: {
           DEFAULT: '#FFFAF4',
-          subtle: '#FAF3EA',
-          card: '#FFFDF9',
+          subtle: '#FBF4EB',
+          surface: '#FFFFFF',
         },
         caramel: {
           DEFAULT: '#B77A45',
-          light: '#D49764',
-          dark: '#935B2B',
+          light: '#CE935F',
+          dark: '#965E2F',
         },
         sage: {
           DEFAULT: '#A6AD8A',
-          light: '#D2D8BE',
-          dark: '#828B63',
+          light: '#CAD0B5',
+          dark: '#7D8661',
         },
         aquatic: {
-          dark: '#031E2A',
-          deep: '#063A4F',
+          deep: '#031E2A',
+          navy: '#05293A',
           teal: '#0D9488',
           cyan: '#06B6D4',
           glow: '#38BDF8',
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
-        display: ['Outfit', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        handwriting: ['Caveat', 'cursive'],
+        sans: ['Manrope', 'DM Sans', 'system-ui', 'sans-serif'],
+        display: ['Outfit', 'Manrope', 'system-ui', 'sans-serif'],
+        body: ['DM Sans', 'Manrope', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        widest: '0.15em',
+        ultra: '0.25em',
       },
       boxShadow: {
-        'soft': '0 4px 20px -2px rgba(59, 22, 13, 0.05), 0 2px 6px -1px rgba(59, 22, 13, 0.03)',
-        'card': '0 8px 30px rgba(59, 22, 13, 0.07)',
-        'hover': '0 14px 40px -4px rgba(59, 22, 13, 0.12)',
-        'float': '0 20px 50px -10px rgba(59, 22, 13, 0.18)',
+        'subtle': '0 2px 10px rgba(53, 21, 14, 0.04)',
+        'luxury': '0 10px 30px -5px rgba(53, 21, 14, 0.08), 0 4px 10px -2px rgba(53, 21, 14, 0.04)',
+        'elevation': '0 20px 45px -10px rgba(53, 21, 14, 0.12)',
       },
-      borderRadius: {
-        '4xl': '2rem',
-        '5xl': '2.5rem',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-6px)' },
-        },
-        pulseGlow: {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '0.8' },
-        },
-      },
-      animation: {
-        float: 'float 4s ease-in-out infinite',
-        glow: 'pulseGlow 3s ease-in-out infinite',
-      }
     },
   },
   plugins: [],

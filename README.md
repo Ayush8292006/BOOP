@@ -1,81 +1,85 @@
-# BOOP STORE — A Little Boop & Lot of Love ❤️
-### A Brand by Volga Life Biosciences
+# BOOP STORE — Elite Luxury Redesign
+### *A Little Boop & Lot of Love ❤️ | A Brand by Volga Life Biosciences*
 
-World-class, premium pet-care ecommerce web application for **BOOP STORE**, featuring dogs, cats, small pets, birds, reptiles, and specialized aquatic ecosystems.
-
----
-
-## 🎨 Visual Identity & Design System
-
-- **Primary Chocolate**: `#3B160D` (Navigation, CTAs, Typography, Footers)
-- **Dark Espresso**: `#29150F` (Welcome screen, Deep brand containers, Footer base)
-- **Warm Beige**: `#F5E9D8` (Supporting cards, accents, trust badges)
-- **Soft Ivory**: `#FFFAF4` (Primary canvas & background)
-- **Caramel**: `#B77A45` (Subtle warmth, badge highlights, icons)
-- **Muted Sage**: `#A6AD8A` (Nature & organic nutrition accents)
-- **Aquatic Cyan/Blue**: `#0E7490` / `#38BDF8` (Volga Life Biosciences aquatic heritage)
-- **Pure White**: `#FFFFFF` (Product cards & elevated surfaces)
+An international-grade, agency-art-directed pet-care ecommerce experience for **BOOP STORE**, a brand by Volga Life Biosciences.
 
 ---
 
-## 🚀 Key Features
+## 💎 Design System & Aesthetic Foundations
 
-1. **Phase 3 — First Visit Welcome Experience**:
-   - Full-screen brand cinematic introduction with official mascot logo, realistic photography, and smooth entrance sequence.
-   - Handled via `localStorage` with a skip option and a "Replay Brand Intro" action.
-2. **Phase 4 — Header & Mega-Menu Navigation**:
-   - Top announcement strip with Pan-India Delivery, 100% Authentic, Easy Returns, and Helpline.
-   - Sticky navbar on scroll with live search, account pet profiles, wishlist counter, and cart badge.
-   - Desktop category dropdowns and responsive slide-in mobile navigation.
-3. **Phase 5 — Hero Experience**:
-   - Editorial asymmetrical composition featuring cuddled golden retriever puppy & kitten.
+- **Deep Chocolate**: `#35150E`
+- **Dark Espresso**: `#29100B`
+- **Chocolate Brown**: `#3B160D`
+- **Warm Beige**: `#F5E9D8`
+- **Soft Ivory**: `#FFFAF4`
+- **Caramel**: `#B77A45`
+- **Muted Sage**: `#A6AD8A`
+- **Pure White**: `#FFFFFF`
+- **Deep Marine**: `#031E2A` / `#38BDF8` (Aquatic Range)
+
+### Typography
+- **Headings**: `Outfit` & `Manrope` (tight tracking, architectural presence)
+- **Body & Subtitles**: `DM Sans` & `Manrope` (refined legibility)
+
+---
+
+## 🎬 Redesigned Experiences
+
+1. **Cinematic Welcome Introduction**:
+   - Full-screen deep espresso background with subtle radial warmth.
+   - Original mascot logo with gentle scale and opacity reveal.
+   - Official brand statement: *"Thoughtfully Curated. Genuinely Trusted. Made for Every Pet."*
+   - Minimalist luxury CTA: *"EXPLORE THE COLLECTION"*.
+   - Zero cartoon elements, zero bouncy animations.
+
+2. **Editorial Asymmetrical Hero**:
    - Headline: *"Everything Your Pets Love, All in One Place."*
-4. **Phase 6 — Trust & Benefits Strip**:
-   - Genuine & Trusted Brands, Pan India Delivery, Easy Returns, Expert Support, Made for Pet Parents.
-5. **Phase 7 — Shop by Pet**:
-   - Dogs, Cats, Small Pets, Birds, Reptiles & Turtles with custom pastel backgrounds and 1-click filtering.
-6. **Phase 8 — Aquatic Range**:
-   - Immersive deep aquatic banner highlighting the foundation in aquatic science by Volga Life Biosciences.
-7. **Phase 9 — Shop by Category**:
-   - 8 product categories with custom iconography and item counters.
-8. **Phase 10 — Promotional Campaigns**:
-   - "Best Deals for Your Pets! (Up to 30% OFF)" and "New Arrivals".
-9. **Phase 11 — Shop by Brands**:
-   - Royal Canin, Pedigree, Whiskas, Drools, Farmina, Himalaya, Hikari, Teraa, Okiko, ProMeal, Hagen, plus "and More...".
-10. **Phase 12 — Editorial Brand Story (About Us)**:
-    - Verbatim reproduction of Volga Life Biosciences' brand copy and mission across 7 editorial sections.
-11. **Phase 13 — Comprehensive Shopping Experience**:
-    - Full Catalog View with multi-filtering (Pet, Category, Brand, Price slider, In-stock toggle, Sorting).
-    - Product Cards with discount badges, wishlist toggling, and quick view.
-    - Product Detail Modal with image gallery, highlights, and related product recommendations.
-    - Slide-out Cart Drawer with item adjustments, free shipping progress bar, and promo code support (`BOOP10`, `LOVEPETS`).
+   - Description: *"Premium food, everyday essentials, fun toys and accessories for your furry and scaly friends."*
+   - Commercial photography featuring a golden retriever and cat with natural lighting.
+   - Fine caption pill: *"Care & Nutrition — Authentic formulas for whole-body vitality"*.
+
+3. **Minimalist Trust Section**:
+   - 5 hairline-separated guarantees: *Genuine & Trusted Brands*, *Pan India Delivery*, *Easy Returns*, *Expert Support*, and *Made for Pet Parents*.
+
+4. **Shop by Pet**:
+   - Architectural 3:4 portrait compositions for Dogs, Cats, Small Pets, Birds, and Reptiles & Turtles with subtle zoom and clean typography.
+
+5. **Aquatic Range (Volga Life Biosciences Heritage)**:
+   - Deep ocean ecosystem spotlighting the biological precision of Volga Life Biosciences and international aquatic feeds.
+
+6. **Shop by Category**:
+   - 8 balanced cards featuring realistic product photography for Food & Treats, Toys & Play, Collars & Leashes, Grooming, Travel, Beds, Health, and Enrichment.
+
+7. **Promotional Duo**:
+   - High-fashion campaign banners: *"Best Deals for Your Pets! (Up to 30% OFF)"* and *"New Arrivals (Curated Just for Your Furry Friends!)"*.
+
+8. **Brands You Can Trust**:
+   - Grayscale-to-color interactive brand gallery: Royal Canin, Pedigree, Whiskas, Drools, Farmina, Himalaya, Hikari, Tetra, Okiko, ProMeal, Hagen, plus and More.
+
+9. **About BOOP STORE**:
+   - Complete editorial storytelling page reproducing the exact verbatim copy across 7 sections with multi-column layouts and aquatic legacy highlights.
+
+10. **Full Frontend Shopping Experience**:
+    - Product Grid with category, brand, price slider, and sorting controls.
+    - Product Detail Modal with thumbnail gallery, specifications, and related items.
+    - Cart Drawer with free shipping threshold bar and promo code verification (`BOOP10`, `LOVEPETS`).
     - Wishlist Drawer and Instant Search Modal.
-    - Interactive Mock Checkout Modal with order confirmation.
-12. **Phase 14 — Queries & Collaborations**:
-    - Friendly illustration banner and contact inquiry dialog.
-13. **Phase 15 — Rich Chocolate Footer**:
-    - Official logo, quick links, customer care policies, social handles, and company copyright.
+    - Mock Checkout with shipping address and confirmation screen.
+
+11. **Queries & Collaborations**:
+    - Architectural inquiry banner and modal dialog.
+
+12. **Deep Chocolate Footer**:
+    - Original logo, tagline, quick links, policy modals, and company attribution: *"A Unit of Volga Life Biosciences LLP"*.
 
 ---
 
-## 🛠️ Tech Stack
-
-- **Framework**: React 18 + TypeScript
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Tooling**: Vite 6
-
----
-
-## 💻 Running Locally
+## 🚀 Running Locally
 
 ```bash
-# Install dependencies
-npm install
-
 # Start development server
 npm run dev
 
-# Build for production
+# Compile production bundle
 npm run build
 ```

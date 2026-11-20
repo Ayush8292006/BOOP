@@ -4,13 +4,14 @@
 
 @layer base {
   :root {
-    --primary-chocolate: #3B160D;
-    --dark-espresso: #29150F;
-    --warm-beige: #F5E9D8;
-    --soft-ivory: #FFFAF4;
-    --caramel: #B77A45;
-    --muted-sage: #A6AD8A;
-    --pure-white: #FFFFFF;
+    --color-deep-chocolate: #35150E;
+    --color-dark-espresso: #29100B;
+    --color-chocolate-brown: #3B160D;
+    --color-warm-beige: #F5E9D8;
+    --color-soft-ivory: #FFFAF4;
+    --color-caramel: #B77A45;
+    --color-muted-sage: #A6AD8A;
+    --color-white: #FFFFFF;
   }
 
   html {
@@ -21,56 +22,37 @@
 
   body {
     background-color: #FFFAF4;
-    color: #3B160D;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: #35150E;
+    font-family: 'DM Sans', 'Manrope', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Manrope', sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
-/* Custom subtle animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Subtle luxury motion styling */
+.editorial-fade {
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideLeft {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+/* Minimalist scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFAF4;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8DBC9;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B77A45;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slideLeft {
-  animation: slideLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slideUp {
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Hide scrollbar utility */
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }

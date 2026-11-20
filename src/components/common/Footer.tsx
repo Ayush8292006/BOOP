@@ -1,7 +1,7 @@
 import React from 'react';
 import { useShop } from '../../context/ShopContext';
 import { Logo } from './Logo';
-import { Instagram, Facebook, Youtube, Linkedin, ArrowUp, Sparkles, Heart } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Linkedin, ArrowUp } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const { setActiveTab, navigateToShopWithFilter, setPolicyModal, setContactModalOpen, replayWelcomeScreen } = useShop();
@@ -11,43 +11,42 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#29150F] text-[#F5E9D8] pt-14 pb-8 border-t-4 border-[#3B160D]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <footer className="bg-[#29100B] text-[#F5E9D8] pt-16 sm:pt-20 pb-10 border-t border-[#35150E]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12 pb-12 border-b border-white/10">
+        {/* Main Footer Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-14 pb-14 border-b border-white/10">
           
-          {/* Brand & Mission (4 cols) */}
-          <div className="lg:col-span-4 space-y-4 text-center md:text-left">
+          {/* Brand Info (4 cols) */}
+          <div className="lg:col-span-4 space-y-4">
             <div className="inline-block cursor-pointer" onClick={() => setActiveTab('home')}>
               <Logo variant="dark" size="lg" />
             </div>
 
-            <p className="font-handwriting text-caramel text-lg font-bold">
+            <p className="font-display text-sm tracking-wide text-caramel uppercase font-semibold">
               A Little Boop &amp; Lot of Love ❤️
             </p>
 
-            <p className="text-xs sm:text-sm text-[#F5E9D8]/70 leading-relaxed max-w-sm mx-auto md:mx-0">
-              India's growing pet-care destination built on decades of aquatic excellence by Volga Life Biosciences. Dedicated to authentic nutrition, joyful playtime, and healthy companions.
+            <p className="text-xs text-[#F5E9D8]/70 leading-relaxed font-light max-w-sm">
+              A growing pet-care destination built on decades of aquatic excellence by Volga Life Biosciences. Dedicated to authentic nutrition, joyful playtime, and healthy companions.
             </p>
 
             <div className="pt-2">
               <button
                 onClick={replayWelcomeScreen}
-                className="inline-flex items-center gap-1.5 text-xs text-caramel hover:text-white transition-colors border border-white/10 px-3 py-1.5 rounded-full bg-white/5"
+                className="text-[11px] uppercase tracking-ultra text-[#F5E9D8]/50 hover:text-white transition-colors"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Replay Brand Welcome Experience</span>
+                &larr; Replay Brand Welcome Experience
               </button>
             </div>
           </div>
 
           {/* Quick Links (2 cols) */}
-          <div className="lg:col-span-2 space-y-3 text-center md:text-left">
-            <h4 className="font-display font-bold text-sm text-[#FFFAF4] uppercase tracking-wider">
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="font-display font-bold text-xs uppercase tracking-ultra text-[#FFFAF4]">
               Quick Links
             </h4>
-            <ul className="space-y-2 text-xs text-[#F5E9D8]/80 font-medium">
+            <ul className="space-y-2.5 text-xs text-[#F5E9D8]/80 font-medium">
               <li>
                 <button
                   onClick={() => setActiveTab('home')}
@@ -84,11 +83,11 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Customer Care (3 cols) */}
-          <div className="lg:col-span-3 space-y-3 text-center md:text-left">
-            <h4 className="font-display font-bold text-sm text-[#FFFAF4] uppercase tracking-wider">
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="font-display font-bold text-xs uppercase tracking-ultra text-[#FFFAF4]">
               Customer Care
             </h4>
-            <ul className="space-y-2 text-xs text-[#F5E9D8]/80 font-medium">
+            <ul className="space-y-2.5 text-xs text-[#F5E9D8]/80 font-medium">
               <li>
                 <button
                   onClick={() => setPolicyModal('shipping')}
@@ -125,13 +124,13 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Social & Company (3 cols) */}
-          <div className="lg:col-span-3 space-y-4 text-center md:text-left">
-            <h4 className="font-display font-bold text-sm text-[#FFFAF4] uppercase tracking-wider">
-              Follow Volga Life Biosciences
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="font-display font-bold text-xs uppercase tracking-ultra text-[#FFFAF4]">
+              Connect With Us
             </h4>
             
-            {/* Social Icons matching reference */}
-            <div className="flex items-center justify-center md:justify-start gap-3">
+            {/* Minimalist Social Icons */}
+            <div className="flex items-center gap-3">
               {[
                 { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
                 { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
@@ -146,40 +145,38 @@ export const Footer: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={soc.label}
-                    className="w-9 h-9 rounded-full bg-white/10 hover:bg-caramel text-beige hover:text-white flex items-center justify-center transition-all duration-200 border border-white/10 hover:scale-110"
+                    className="w-8 h-8 rounded-full border border-white/10 hover:border-caramel text-[#F5E9D8] hover:text-white flex items-center justify-center transition-colors"
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-3.5 h-3.5" />
                   </a>
                 );
               })}
             </div>
 
-            <div className="pt-2 text-xs text-[#F5E9D8]/70">
+            <div className="pt-2 text-xs text-[#F5E9D8]/60 font-light">
               <p className="font-semibold text-white">A Unit of Volga Life Biosciences LLP</p>
-              <p className="mt-1">Pioneers in high-integrity aquatic feeds &amp; comprehensive pet care solutions.</p>
+              <p className="mt-1">Pioneers in high-integrity aquatic feeds &amp; comprehensive pet care.</p>
             </div>
           </div>
 
         </div>
 
         {/* Bottom Sub-footer */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F5E9D8]/60">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#F5E9D8]/50 uppercase tracking-widest font-light">
           <div>
             &copy; 2026 BOOP STORE. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-caramel">🌱</span>
-            <span>A Unit of Volga Life Biosciences LLP</span>
+          <div>
+            A Unit of Volga Life Biosciences LLP
           </div>
 
           <button
             onClick={scrollToTop}
             className="flex items-center gap-1.5 hover:text-white transition-colors"
-            title="Back to Top"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
+            <ArrowUp className="w-3 h-3" />
           </button>
         </div>
 

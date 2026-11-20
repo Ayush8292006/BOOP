@@ -201,7 +201,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       return [...prev, { product, quantity, selectedSize }];
     });
-    showToast(`Added ${product.title.slice(0, 24)}... to your Cart ❤️`);
+    showToast(`Added ${product.title.slice(0, 24)}... to your bag`);
   };
 
   const updateQuantity = (productId: string, delta: number) => {
@@ -220,7 +220,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const removeFromCart = (productId: string) => {
     setCart((prev) => prev.filter((item) => item.product.id !== productId));
-    showToast('Item removed from cart');
+    showToast('Item removed from shopping bag');
   };
 
   const clearCart = () => {
@@ -234,7 +234,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         showToast('Removed from Wishlist');
         return prev.filter((id) => id !== productId);
       } else {
-        showToast('Saved to Wishlist ❤️');
+        showToast('Saved to Wishlist');
         return [...prev, productId];
       }
     });
@@ -253,16 +253,16 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const discount = Math.round(cartSubtotal * 0.1);
       setAppliedPromo('BOOP10 (10% OFF)');
       setPromoDiscount(discount);
-      showToast('Yay! 10% discount applied ✨');
+      showToast('10% privilege discount applied');
       return { success: true, message: '10% discount applied successfully!' };
     } else if (clean === 'LOVEPETS') {
       const discount = 150;
       setAppliedPromo('LOVEPETS (₹150 OFF)');
       setPromoDiscount(discount);
-      showToast('₹150 flat discount applied ❤️');
+      showToast('₹150 discount applied');
       return { success: true, message: '₹150 pet-lover discount applied!' };
     } else {
-      return { success: false, message: 'Invalid promo code. Try "BOOP10" or "LOVEPETS"' };
+      return { success: false, message: 'Invalid code. Try "BOOP10" or "LOVEPETS"' };
     }
   };
 

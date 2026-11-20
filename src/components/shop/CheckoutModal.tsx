@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useShop } from '../../context/ShopContext';
-import { X, CheckCircle, Truck, ShieldCheck, ArrowRight, Heart } from 'lucide-react';
+import { X, ShieldCheck, Truck, ArrowRight, Check } from 'lucide-react';
 
 export const CheckoutModal: React.FC = () => {
   const {
     checkoutModalOpen,
     setCheckoutModalOpen,
-    cart,
     clearCart,
     cartSubtotal,
     promoDiscount,
@@ -53,39 +52,38 @@ export const CheckoutModal: React.FC = () => {
       />
 
       {/* Dialog */}
-      <div className="relative bg-[#FFFAF4] rounded-3xl max-w-2xl w-full shadow-2xl border border-beige-border overflow-hidden z-10 max-h-[90vh] flex flex-col">
+      <div className="relative bg-[#FFFAF4] rounded-3xl max-w-2xl w-full shadow-elevation border border-[#E8DBC9] overflow-hidden z-10 max-h-[90vh] flex flex-col">
         
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-beige-border bg-white flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-caramel" />
-            <h3 className="font-display font-bold text-base sm:text-lg text-chocolate">
-              {step === 'details' ? 'Secure Checkout' : 'Order Placed with Love!'}
+        <div className="p-5 border-b border-[#E8DBC9] bg-white flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <ShieldCheck className="w-4 h-4 text-caramel" />
+            <h3 className="font-display font-bold text-base text-chocolate uppercase tracking-wider">
+              {step === 'details' ? 'Secure Checkout' : 'Order Placed'}
             </h3>
           </div>
           <button
             onClick={handleClose}
-            className="p-1.5 rounded-full hover:bg-beige-light text-chocolate transition-colors"
+            className="p-1 rounded text-chocolate hover:text-caramel transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-6 overflow-y-auto space-y-6">
+        <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
           {step === 'details' ? (
             <form onSubmit={handleSubmitOrder} className="space-y-6">
               
-              {/* Pet Parent Delivery Information */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold text-chocolate uppercase tracking-wider flex items-center gap-2">
-                  <Truck className="w-4 h-4 text-caramel" />
-                  <span>1. Delivery Destination</span>
+                <h4 className="text-[10px] font-bold text-chocolate uppercase tracking-ultra flex items-center gap-2">
+                  <Truck className="w-3.5 h-3.5 text-caramel" />
+                  <span>Delivery Details</span>
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div>
-                    <label className="block text-[11px] font-bold text-chocolate/70 mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-chocolate/70 mb-1">
                       Full Name
                     </label>
                     <input
@@ -93,11 +91,11 @@ export const CheckoutModal: React.FC = () => {
                       required
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full bg-white border border-beige-border rounded-xl px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
+                      className="w-full bg-white border border-[#E8DBC9] rounded-lg px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-chocolate/70 mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-chocolate/70 mb-1">
                       Phone Number
                     </label>
                     <input
@@ -105,11 +103,11 @@ export const CheckoutModal: React.FC = () => {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-white border border-beige-border rounded-xl px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
+                      className="w-full bg-white border border-[#E8DBC9] rounded-lg px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
                     />
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-[11px] font-bold text-chocolate/70 mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-chocolate/70 mb-1">
                       Street Address
                     </label>
                     <input
@@ -117,11 +115,11 @@ export const CheckoutModal: React.FC = () => {
                       required
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      className="w-full bg-white border border-beige-border rounded-xl px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
+                      className="w-full bg-white border border-[#E8DBC9] rounded-lg px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-chocolate/70 mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-chocolate/70 mb-1">
                       City
                     </label>
                     <input
@@ -129,11 +127,11 @@ export const CheckoutModal: React.FC = () => {
                       required
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      className="w-full bg-white border border-beige-border rounded-xl px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
+                      className="w-full bg-white border border-[#E8DBC9] rounded-lg px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-chocolate/70 mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-chocolate/70 mb-1">
                       Pincode
                     </label>
                     <input
@@ -141,37 +139,29 @@ export const CheckoutModal: React.FC = () => {
                       required
                       value={formData.pincode}
                       onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                      className="w-full bg-white border border-beige-border rounded-xl px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
+                      className="w-full bg-white border border-[#E8DBC9] rounded-lg px-3 py-2 text-chocolate focus:outline-none focus:border-caramel"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Dedicated Pet Name Note */}
-              <div className="p-3 bg-beige/50 rounded-2xl border border-beige-border flex items-center justify-between text-xs">
-                <span className="text-chocolate font-medium">Ordering treats &amp; care for:</span>
-                <span className="font-bold text-chocolate bg-white px-3 py-1 rounded-full shadow-sm">
-                  🐾 {formData.petName}
-                </span>
-              </div>
-
               {/* Payment Method simulation */}
               <div className="space-y-2">
-                <h4 className="text-xs font-bold text-chocolate uppercase tracking-wider">
-                  2. Select Payment Method (Mock Frontend)
+                <h4 className="text-[10px] font-bold text-chocolate uppercase tracking-ultra">
+                  Payment Method
                 </h4>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-3">
                   {[
-                    { id: 'upi', label: 'UPI / QR', icon: '📱' },
-                    { id: 'card', label: 'Credit/Debit', icon: '💳' },
-                    { id: 'cod', label: 'Cash on Delivery', icon: '💵' },
+                    { id: 'upi', label: 'UPI / QR' },
+                    { id: 'card', label: 'Credit Card' },
+                    { id: 'cod', label: 'Cash on Delivery' },
                   ].map((pm) => (
                     <label
                       key={pm.id}
-                      className={`p-3 rounded-2xl border text-center cursor-pointer transition-all ${
+                      className={`p-3 rounded-xl border text-center cursor-pointer transition-all ${
                         formData.paymentMethod === pm.id
-                          ? 'bg-chocolate text-beige border-chocolate shadow-sm'
-                          : 'bg-white border-beige-border text-chocolate hover:bg-beige-light'
+                          ? 'bg-chocolate text-[#F5E9D8] border-chocolate shadow-subtle'
+                          : 'bg-white border-[#E8DBC9] text-chocolate hover:border-caramel'
                       }`}
                     >
                       <input
@@ -181,17 +171,16 @@ export const CheckoutModal: React.FC = () => {
                         onChange={() => setFormData({ ...formData, paymentMethod: pm.id })}
                         className="sr-only"
                       />
-                      <div className="text-lg">{pm.icon}</div>
-                      <div className="text-xs font-bold mt-1">{pm.label}</div>
+                      <div className="text-xs font-bold uppercase tracking-wider">{pm.label}</div>
                     </label>
                   ))}
                 </div>
               </div>
 
-              {/* Summary and Complete */}
-              <div className="pt-4 border-t border-beige-border flex items-center justify-between">
+              {/* Total & Action */}
+              <div className="pt-4 border-t border-[#E8DBC9] flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-chocolate/60">Grand Total to Pay</p>
+                  <p className="text-[10px] uppercase font-bold text-chocolate/50 tracking-wider">Total Amount</p>
                   <p className="font-display font-black text-xl text-chocolate">
                     ₹{finalTotal.toLocaleString('en-IN')}
                   </p>
@@ -199,42 +188,40 @@ export const CheckoutModal: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-chocolate text-beige hover:bg-chocolate-light font-bold text-sm shadow-xl transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-chocolate text-[#F5E9D8] hover:bg-chocolate-hover font-bold text-xs uppercase tracking-widest shadow-luxury transition-all"
                 >
-                  <span>Place Mock Order</span>
-                  <ArrowRight className="w-4 h-4 text-caramel-light" />
+                  <span>Confirm Order</span>
+                  <ArrowRight className="w-4 h-4 text-caramel" />
                 </button>
               </div>
 
             </form>
           ) : (
-            /* Success State */
-            <div className="py-8 text-center space-y-4">
-              <div className="w-20 h-20 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto shadow-lg text-4xl">
-                ❤️
+            <div className="py-12 text-center space-y-4">
+              <div className="w-16 h-16 rounded-full bg-[#F5E9D8] text-chocolate flex items-center justify-center mx-auto shadow-subtle">
+                <Check className="w-7 h-7 text-caramel" />
               </div>
 
               <h3 className="font-display font-extrabold text-2xl text-chocolate">
-                Thank You, Pet Parent!
+                Order Confirmed
               </h3>
 
-              <p className="text-sm text-chocolate/80 max-w-md mx-auto leading-relaxed">
-                Your mock order <span className="font-bold text-chocolate">#BOOP-{Math.floor(100000 + Math.random() * 900000)}</span> has been received with a little boop &amp; a lot of love!
+              <p className="text-sm text-chocolate/80 max-w-md mx-auto font-light leading-relaxed">
+                Order <span className="font-bold text-chocolate">#BP-{Math.floor(100000 + Math.random() * 900000)}</span> has been placed. A confirmation email has been dispatched to {formData.email}.
               </p>
 
-              <div className="p-4 bg-white rounded-2xl border border-beige-border max-w-md mx-auto text-left text-xs space-y-1.5 shadow-sm">
+              <div className="p-4 bg-white rounded-xl border border-[#E8DBC9] max-w-md mx-auto text-left text-xs space-y-1.5 shadow-subtle">
                 <p><strong className="text-chocolate">Recipient:</strong> {formData.fullName}</p>
-                <p><strong className="text-chocolate">Address:</strong> {formData.address}, {formData.city} - {formData.pincode}</p>
-                <p><strong className="text-chocolate">Estimated Delivery:</strong> Within 2-3 Business Days (Pan India)</p>
-                <p><strong className="text-chocolate">Dispatch Partner:</strong> Volga Life Logistics</p>
+                <p><strong className="text-chocolate">Destination:</strong> {formData.address}, {formData.city} - {formData.pincode}</p>
+                <p><strong className="text-chocolate">Logistics:</strong> Volga Life Pan-India Delivery</p>
               </div>
 
               <div className="pt-4">
                 <button
                   onClick={handleClose}
-                  className="px-8 py-3 rounded-full bg-chocolate text-beige text-xs font-bold hover:bg-chocolate-light transition-all shadow-md"
+                  className="px-8 py-3 rounded-full bg-chocolate text-[#F5E9D8] text-xs font-bold uppercase tracking-wider hover:bg-chocolate-hover transition-colors shadow-subtle"
                 >
-                  Continue Shopping
+                  Return to Store
                 </button>
               </div>
             </div>

@@ -7,12 +7,7 @@ import { PetCategory, ProductCategory } from '../../types';
 import {
   Filter,
   SlidersHorizontal,
-  ChevronDown,
-  RotateCcw,
-  Sparkles,
-  Dog,
-  Cat,
-  Fish
+  RotateCcw
 } from 'lucide-react';
 
 export const ShopView: React.FC = () => {
@@ -51,27 +46,21 @@ export const ShopView: React.FC = () => {
   // Filtering Logic
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
-      // Pet Filter
       if (selectedPetFilter !== 'All' && product.petCategory !== selectedPetFilter) {
         return false;
       }
-      // Category Filter
       if (selectedCategoryFilter !== 'All' && product.category !== selectedCategoryFilter) {
         return false;
       }
-      // Brand Filter
       if (selectedBrandFilter !== 'All' && product.brand !== selectedBrandFilter) {
         return false;
       }
-      // Max Price Filter
       if (product.price > maxPrice) {
         return false;
       }
-      // In Stock
       if (inStockOnly && !product.inStock) {
         return false;
       }
-      // Search Query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matches =
@@ -86,7 +75,7 @@ export const ShopView: React.FC = () => {
       if (sortOption === 'price-low') return a.price - b.price;
       if (sortOption === 'price-high') return b.price - a.price;
       if (sortOption === 'discount') return (b.discountPercentage || 0) - (a.discountPercentage || 0);
-      return 0; // featured default
+      return 0;
     });
   }, [selectedPetFilter, selectedCategoryFilter, selectedBrandFilter, maxPrice, inStockOnly, searchQuery, sortOption]);
 
@@ -108,17 +97,17 @@ export const ShopView: React.FC = () => {
     !!searchQuery;
 
   return (
-    <div className="bg-[#FFFAF4] min-h-screen py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+    <div className="bg-[#FFFAF4] min-h-screen py-10 sm:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
         
-        {/* Breadcrumbs & Page Heading */}
-        <div className="space-y-2">
-          <nav className="text-xs text-chocolate/60 flex items-center gap-1.5 font-medium">
+        {/* Breadcrumbs & Page Header */}
+        <div className="space-y-3">
+          <nav className="text-[11px] uppercase tracking-wider text-chocolate/50 flex items-center gap-2 font-medium">
             <button onClick={() => setActiveTab('home')} className="hover:text-caramel">
               Home
             </button>
             <span>/</span>
-            <span className="text-chocolate font-semibold">Pet Store Catalog</span>
+            <span className="text-chocolate font-semibold">Pet Collection</span>
             {selectedPetFilter !== 'All' && (
               <>
                 <span>/</span>
@@ -127,15 +116,15 @@ export const ShopView: React.FC = () => {
             )}
           </nav>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E8DBC9] pb-6">
             <div>
-              <h1 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-chocolate tracking-tight">
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-chocolate tracking-tight">
                 {selectedPetFilter === 'All'
-                  ? 'Shop All Pet Essentials'
+                  ? 'Shop The Complete Collection'
                   : `Curated for ${selectedPetFilter}`}
               </h1>
-              <p className="text-xs sm:text-sm text-chocolate/70 mt-1">
-                Showing {filteredProducts.length} authentic products by leading international &amp; Indian brands
+              <p className="text-xs sm:text-sm text-chocolate/70 font-light mt-1">
+                Showing {filteredProducts.length} authentic products by premier international &amp; Indian brands
               </p>
             </div>
 
@@ -143,14 +132,14 @@ export const ShopView: React.FC = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-                className="lg:hidden inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-beige-border text-xs font-bold text-chocolate shadow-sm"
+                className="lg:hidden inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white border border-[#E8DBC9] text-xs font-bold text-chocolate uppercase tracking-wider shadow-subtle"
               >
                 <SlidersHorizontal className="w-3.5 h-3.5 text-caramel" />
                 <span>Filters {hasActiveFilters && '•'}</span>
               </button>
 
-              <div className="flex items-center gap-2 bg-white border border-beige-border rounded-xl px-3 py-1.5 shadow-sm text-xs text-chocolate">
-                <span className="text-chocolate/60 font-medium">Sort:</span>
+              <div className="flex items-center gap-2 bg-white border border-[#E8DBC9] rounded-lg px-3 py-2 shadow-subtle text-xs text-chocolate">
+                <span className="text-chocolate/50 font-medium uppercase text-[10px] tracking-wider">Sort:</span>
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value as any)}
@@ -167,19 +156,19 @@ export const ShopView: React.FC = () => {
           </div>
         </div>
 
-        {/* Quick Pet Horizontal Filter Strip */}
+        {/* Minimalist Pet Horizontal Filter Strip */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {petFilters.map((pet) => (
             <button
               key={pet}
               onClick={() => setSelectedPetFilter(pet)}
-              className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-sm ${
+              className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all ${
                 selectedPetFilter === pet
-                  ? 'bg-chocolate text-beige shadow-md'
-                  : 'bg-white border border-beige-border text-chocolate hover:bg-beige-light hover:border-caramel/40'
+                  ? 'bg-chocolate text-[#F5E9D8] shadow-subtle'
+                  : 'bg-white border border-[#E8DBC9] text-chocolate hover:border-caramel'
               }`}
             >
-              {pet === 'All' ? '🐾 All Pets' : pet}
+              {pet === 'All' ? 'All Portals' : pet}
             </button>
           ))}
         </div>
@@ -188,22 +177,22 @@ export const ShopView: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Desktop Sidebar Filters */}
-          <aside className={`lg:col-span-3 space-y-6 bg-white p-5 rounded-3xl border border-beige-border shadow-soft ${
+          <aside className={`lg:col-span-3 space-y-6 bg-white p-6 rounded-2xl border border-[#E8DBC9] shadow-subtle ${
             mobileFiltersOpen ? 'block' : 'hidden lg:block'
           }`}>
             
             {/* Header & Reset */}
-            <div className="flex items-center justify-between pb-3 border-b border-beige-border">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8DBC9]">
               <div className="flex items-center gap-2">
                 <Filter className="w-4 h-4 text-caramel" />
-                <h3 className="font-display font-bold text-sm text-chocolate uppercase tracking-wider">
+                <h3 className="font-display font-bold text-xs uppercase tracking-ultra text-chocolate">
                   Filters
                 </h3>
               </div>
               {hasActiveFilters && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-caramel hover:text-caramel-dark font-semibold flex items-center gap-1 hover:underline"
+                  className="text-[11px] text-caramel hover:text-chocolate font-bold uppercase tracking-wider flex items-center gap-1"
                 >
                   <RotateCcw className="w-3 h-3" />
                   <span>Reset</span>
@@ -213,22 +202,22 @@ export const ShopView: React.FC = () => {
 
             {/* Filter by Product Category */}
             <div className="space-y-2">
-              <h4 className="text-xs font-bold text-chocolate uppercase tracking-wider">
+              <h4 className="text-[10px] font-bold text-chocolate uppercase tracking-ultra">
                 Category
               </h4>
-              <div className="space-y-1 max-h-48 overflow-y-auto pr-1">
+              <div className="space-y-1.5 max-h-52 overflow-y-auto pr-1">
                 {productCategories.map((cat) => (
                   <label
                     key={cat}
                     onClick={() => setSelectedCategoryFilter(cat)}
-                    className="flex items-center gap-2 text-xs text-chocolate/80 hover:text-chocolate cursor-pointer py-1"
+                    className="flex items-center gap-2 text-xs text-chocolate/80 hover:text-chocolate cursor-pointer py-0.5"
                   >
                     <input
                       type="radio"
                       name="prodCategory"
                       checked={selectedCategoryFilter === cat}
                       onChange={() => setSelectedCategoryFilter(cat)}
-                      className="text-caramel focus:ring-caramel accent-chocolate"
+                      className="accent-chocolate"
                     />
                     <span className={selectedCategoryFilter === cat ? 'font-bold text-chocolate' : ''}>
                       {cat}
@@ -239,21 +228,21 @@ export const ShopView: React.FC = () => {
             </div>
 
             {/* Filter by Brand */}
-            <div className="space-y-2 pt-3 border-t border-beige-border">
-              <h4 className="text-xs font-bold text-chocolate uppercase tracking-wider">
+            <div className="space-y-2 pt-4 border-t border-[#E8DBC9]">
+              <h4 className="text-[10px] font-bold text-chocolate uppercase tracking-ultra">
                 Brand
               </h4>
-              <div className="space-y-1 max-h-48 overflow-y-auto pr-1">
+              <div className="space-y-1.5 max-h-52 overflow-y-auto pr-1">
                 <label
                   onClick={() => setSelectedBrandFilter('All')}
-                  className="flex items-center gap-2 text-xs text-chocolate/80 hover:text-chocolate cursor-pointer py-1"
+                  className="flex items-center gap-2 text-xs text-chocolate/80 hover:text-chocolate cursor-pointer py-0.5"
                 >
                   <input
                     type="radio"
                     name="brandFilter"
                     checked={selectedBrandFilter === 'All'}
                     onChange={() => setSelectedBrandFilter('All')}
-                    className="text-caramel focus:ring-caramel accent-chocolate"
+                    className="accent-chocolate"
                   />
                   <span className={selectedBrandFilter === 'All' ? 'font-bold text-chocolate' : ''}>
                     All Brands
@@ -263,14 +252,14 @@ export const ShopView: React.FC = () => {
                   <label
                     key={brand.id}
                     onClick={() => setSelectedBrandFilter(brand.name)}
-                    className="flex items-center gap-2 text-xs text-chocolate/80 hover:text-chocolate cursor-pointer py-1"
+                    className="flex items-center gap-2 text-xs text-chocolate/80 hover:text-chocolate cursor-pointer py-0.5"
                   >
                     <input
                       type="radio"
                       name="brandFilter"
                       checked={selectedBrandFilter === brand.name}
                       onChange={() => setSelectedBrandFilter(brand.name)}
-                      className="text-caramel focus:ring-caramel accent-chocolate"
+                      className="accent-chocolate"
                     />
                     <span className={selectedBrandFilter === brand.name ? 'font-bold text-chocolate' : ''}>
                       {brand.name}
@@ -281,10 +270,10 @@ export const ShopView: React.FC = () => {
             </div>
 
             {/* Price Range Slider */}
-            <div className="space-y-2 pt-3 border-t border-beige-border">
-              <div className="flex items-center justify-between text-xs font-bold text-chocolate uppercase tracking-wider">
+            <div className="space-y-2 pt-4 border-t border-[#E8DBC9]">
+              <div className="flex items-center justify-between text-[10px] font-bold text-chocolate uppercase tracking-ultra">
                 <span>Max Price</span>
-                <span className="text-caramel">₹{maxPrice.toLocaleString('en-IN')}</span>
+                <span className="text-caramel font-display font-bold text-xs">₹{maxPrice.toLocaleString('en-IN')}</span>
               </div>
               <input
                 type="range"
@@ -295,21 +284,21 @@ export const ShopView: React.FC = () => {
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                 className="w-full accent-chocolate cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] text-chocolate/50 font-medium">
+              <div className="flex justify-between text-[10px] text-chocolate/40 font-medium">
                 <span>₹200</span>
                 <span>₹5,500</span>
               </div>
             </div>
 
             {/* In-stock toggle */}
-            <div className="pt-3 border-t border-beige-border">
+            <div className="pt-4 border-t border-[#E8DBC9]">
               <label className="flex items-center justify-between cursor-pointer">
-                <span className="text-xs font-bold text-chocolate">In-Stock Only</span>
+                <span className="text-xs font-bold text-chocolate uppercase tracking-wider text-[11px]">In-Stock Only</span>
                 <input
                   type="checkbox"
                   checked={inStockOnly}
                   onChange={(e) => setInStockOnly(e.target.checked)}
-                  className="rounded text-caramel focus:ring-caramel accent-chocolate w-4 h-4"
+                  className="accent-chocolate w-4 h-4"
                 />
               </label>
             </div>
@@ -319,23 +308,22 @@ export const ShopView: React.FC = () => {
           {/* Product Grid Area (9 cols) */}
           <main className="lg:col-span-9">
             {filteredProducts.length === 0 ? (
-              <div className="p-12 text-center bg-white rounded-3xl border border-beige-border shadow-soft space-y-4">
-                <div className="text-4xl">🐾</div>
+              <div className="p-16 text-center bg-white rounded-2xl border border-[#E8DBC9] shadow-subtle space-y-4">
                 <h3 className="font-display font-bold text-xl text-chocolate">
-                  No products found for this filter
+                  No products found for this selection
                 </h3>
-                <p className="text-xs sm:text-sm text-chocolate/70 max-w-sm mx-auto">
-                  Try adjusting your price range, clearing brand selections, or exploring our other pet collections.
+                <p className="text-xs sm:text-sm text-chocolate/70 max-w-sm mx-auto font-light">
+                  Try adjusting your price range or clearing selected brand filters.
                 </p>
                 <button
                   onClick={resetFilters}
-                  className="px-6 py-2.5 rounded-full bg-chocolate text-beige text-xs font-bold hover:bg-chocolate-light transition-all shadow-md"
+                  className="px-6 py-2.5 rounded-full bg-chocolate text-[#F5E9D8] text-xs font-bold uppercase tracking-wider hover:bg-chocolate-hover transition-colors"
                 >
                   Clear All Filters
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
