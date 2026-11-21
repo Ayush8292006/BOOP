@@ -6,10 +6,7 @@ import {
   User,
   Heart,
   ShoppingBag,
-  Menu,
-  X,
 } from 'lucide-react';
-import { PetCategory, ProductCategory } from '../../types';
 
 export const Navbar: React.FC = () => {
   const {
@@ -27,11 +24,10 @@ export const Navbar: React.FC = () => {
   } = useShop();
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 25);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -47,7 +43,7 @@ export const Navbar: React.FC = () => {
     }
   };
 
-  // Nav pills directly matching Reference Image 1
+  // Category navigation pills
   const navCategories = [
     { label: 'Home', icon: '🏠', action: () => setActiveTab('home'), isHome: true },
     { label: 'Dogs', icon: '🐾', action: () => navigateToShopWithFilter({ pet: 'Dogs' }) },
@@ -70,26 +66,67 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-300 bg-[#FFFAF4] ${
         isScrolled
-          ? 'bg-[#FFFAF4]/95 backdrop-blur-md shadow-subtle border-b border-[#E8DBC9]'
-          : 'bg-[#FFFAF4] border-b border-[#E8DBC9]/50'
+          ? 'shadow-xs border-b border-[#E8DBC9]'
+          : 'border-b border-[#E8DBC9]/50'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Main Header Bar */}
-        <div className="flex items-center justify-between h-20 sm:h-22 gap-4 sm:gap-6">
-          
-          {/* Mobile menu trigger */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-chocolate hover:text-caramel transition-colors cursor-pointer"
-            aria-label="Open menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+        {/* ========================================================= */}
+        {/* MOBILE VIEW (Blinkit / Zepto App Style Header)           */}
+        {/* ========================================================= */}
+        <div className="md:hidden py-2.5 space-y-2">
+          {/* Mobile Top Row: Logo + Delivery Subtitle + Profile */}
+          <div className="flex items-center justify-between">
+            <div
+              onClick={() => setActiveTab('home')}
+              className="cursor-pointer flex items-center gap-2"
+            >
+              <Logo variant="light" size="sm" />
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold text-[#3B160D] uppercase tracking-wider leading-none">
+                  BOOP STORE
+                </span>
+                <span className="text-[9px] text-[#B77A45] font-medium tracking-tight mt-0.5">
+                  Pan India Delivery 🐾
+                </span>
+              </div>
+            </div>
 
+            {/* Right: Just clean profile button */}
+            <button
+              onClick={() => setPetProfileModalOpen(true)}
+              className="w-8 h-8 rounded-full bg-[#FAF2E6] border border-[#EADBCC] flex items-center justify-center text-[#3B160D] cursor-pointer shadow-2xs"
+              title="My Account"
+            >
+              <User className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Mobile Row 2: Full-Width Clean Search Bar (Blinkit / Zepto style) */}
+          <div>
+            <button
+              onClick={() => setSearchModalOpen(true)}
+              className="w-full bg-white border border-[#E8DBC9] rounded-xl py-2 px-3.5 flex items-center justify-between text-xs text-[#35150E]/60 shadow-2xs cursor-pointer text-left"
+            >
+              <div className="flex items-center gap-2 truncate">
+                <Search className="w-3.5 h-3.5 text-[#B77A45] flex-shrink-0" />
+                <span className="truncate">Search &quot;dog food, cat treats, toys...&quot;</span>
+              </div>
+              <span className="text-[10px] font-bold text-[#3B160D] uppercase tracking-wider flex-shrink-0 bg-[#FAF2E6] px-2 py-0.5 rounded">
+                Search
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* ========================================================= */}
+        {/* DESKTOP VIEW                                              */}
+        {/* ========================================================= */}
+        <div className="hidden md:flex items-center justify-between h-20 gap-6">
+          
           {/* Left: Original Brand Logo with tagline */}
           <div className="flex items-center gap-4">
             <div
@@ -109,8 +146,8 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Center: Search Bar directly matching Reference Image 1 */}
-          <div className="flex-1 max-w-xl mx-4 hidden md:block">
+          {/* Center: Search Bar */}
+          <div className="flex-1 max-w-xl mx-4">
             <form onSubmit={handleSearchSubmit} className="relative">
               <input
                 type="text"
@@ -133,16 +170,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Right: Actions (Account, Wishlist, Bag) */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            {/* Mobile search trigger */}
-            <button
-              onClick={() => setSearchModalOpen(true)}
-              className="md:hidden p-2 text-chocolate hover:text-caramel transition-colors"
-              aria-label="Search"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-
+          <div className="flex items-center gap-4">
             {/* Account */}
             <button
               onClick={() => setPetProfileModalOpen(true)}
@@ -150,7 +178,7 @@ export const Navbar: React.FC = () => {
               title="My Account"
             >
               <User className="w-4 h-4" />
-              <span className="hidden sm:inline text-xs font-semibold tracking-wider">Account</span>
+              <span className="text-xs font-semibold tracking-wider">Account</span>
             </button>
 
             {/* Wishlist */}
@@ -166,7 +194,7 @@ export const Navbar: React.FC = () => {
                   {wishlist.length}
                 </span>
               )}
-              <span className="hidden sm:inline text-xs font-semibold tracking-wider">Wishlist</span>
+              <span className="text-xs font-semibold tracking-wider">Wishlist</span>
             </button>
 
             {/* Cart */}
@@ -178,13 +206,13 @@ export const Navbar: React.FC = () => {
             >
               <ShoppingBag className="w-4 h-4 text-[#F5E9D8]" />
               <span className="text-xs font-bold text-white tracking-wide">{cartCount}</span>
-              <span className="hidden sm:inline text-xs font-semibold tracking-wider">Cart</span>
+              <span className="text-xs font-semibold tracking-wider">Cart</span>
             </button>
           </div>
 
         </div>
 
-        {/* Category Pill Navigation (Desktop) - Directly matching Reference Image 1 */}
+        {/* Category Pill Navigation (Desktop) */}
         <nav className="hidden lg:block border-t border-[#E8DBC9]/60 py-2.5">
           <div className="flex items-center justify-between gap-2 overflow-x-auto scrollbar-none">
             {navCategories.map((item, idx) => {
@@ -208,50 +236,6 @@ export const Navbar: React.FC = () => {
         </nav>
 
       </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <Logo variant="light" size="sm" />
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-chocolate"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              <div className="space-y-2 pt-4">
-                {navCategories.map((item, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      item.action();
-                      setMobileMenuOpen(false);
-                    }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-sm font-bold text-chocolate hover:bg-[#FAF2E6] transition-colors"
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-6 border-t border-[#E8DBC9] text-xs text-chocolate/60">
-              <p>A Brand by Volga Life Biosciences</p>
-            </div>
-          </div>
-        </div>
-      )}
-
     </header>
   );
 };
