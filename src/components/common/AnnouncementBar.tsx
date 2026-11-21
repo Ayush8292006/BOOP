@@ -38,12 +38,13 @@ export const AnnouncementBar: React.FC = () => {
         <div className="flex items-center gap-6 text-[#F5E9D8]/70">
           <button
             onClick={replayWelcomeScreen}
-            className="hidden md:inline-block text-[10px] tracking-ultra text-[#B77A45] hover:text-[#F5E9D8] transition-colors uppercase"
+            className="inline-flex items-center gap-1.5 text-[10px] tracking-widest text-[#B77A45] hover:text-[#F5E9D8] transition-colors uppercase font-semibold px-2 py-0.5 rounded bg-white/5 border border-white/10"
+            title="Replay cinematic welcome screen curtain"
           >
-            Experience Intro
+            <span>✨ Welcome Intro</span>
           </button>
 
-          <span className="hidden md:inline text-white/10 font-light">|</span>
+          <span className="text-white/10 font-light">|</span>
 
           <a
             href="tel:+919876543210"

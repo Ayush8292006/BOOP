@@ -132,15 +132,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Welcome screen on first visit
-  const [welcomeScreenVisible, setWelcomeScreenVisible] = useState<boolean>(() => {
-    try {
-      const hasSeen = localStorage.getItem('boop_welcome_seen');
-      return !hasSeen;
-    } catch {
-      return true;
-    }
-  });
+  // Welcome screen starts visible by default so user always experiences the intro
+  const [welcomeScreenVisible, setWelcomeScreenVisible] = useState<boolean>(true);
 
   // Persist cart
   useEffect(() => {
