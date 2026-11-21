@@ -1,193 +1,207 @@
 import React, { useState, useEffect } from 'react';
 import { useShop } from '../../context/ShopContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { Sparkles, ArrowUp, ChevronRight } from 'lucide-react';
 
 export const WelcomeScreen: React.FC = () => {
   const { welcomeScreenVisible, setWelcomeScreenVisible } = useShop();
-  const [isExiting, setIsExiting] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [isReady, setIsReady] = useState(false);
+  const [isWipingUp, setIsWipingUp] = useState(false);
 
-  // Check if reduced motion or already seen
+  useEffect(() => {
+    if (!welcomeScreenVisible) return;
+
+    // Smooth counter from 0 to 100
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsReady(true);
+          return 100;
+        }
+        // Accelerate smoothly
+        const step = prev < 60 ? 3 : prev < 90 ? 2 : 1;
+        return Math.min(100, prev + step);
+      });
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, [welcomeScreenVisible]);
+
+  // Auto trigger curtain wipe up after reaching 100% after a short pause
+  useEffect(() => {
+    if (isReady && !isWipingUp) {
+      const autoTimer = setTimeout(() => {
+        triggerCurtainWipe();
+      }, 900);
+      return () => clearTimeout(autoTimer);
+    }
+  }, [isReady]);
+
   if (!welcomeScreenVisible) return null;
 
-  const handleDismiss = () => {
+  const triggerCurtainWipe = () => {
     try {
       localStorage.setItem('boop_welcome_seen', 'true');
     } catch {
       // ignore
     }
-    setIsExiting(true);
+    setIsWipingUp(true);
     setTimeout(() => {
       setWelcomeScreenVisible(false);
-      setIsExiting(false);
-    }, 800);
+      setIsWipingUp(false);
+    }, 950);
   };
 
   return (
     <AnimatePresence>
-      {!isExiting && (
-        <motion.div
-          key="welcome-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0, y: -40, filter: 'blur(10px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }}
-          transition={{ duration: 0.6 }}
-          className="fixed inset-0 z-[9999] flex flex-col justify-between items-center px-4 sm:px-8 py-6 sm:py-10 bg-[#29100B] text-[#FFFAF4] select-none overflow-y-auto"
-        >
-          {/* Ambient Lighting & Luxury Atmospheric Mesh */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <motion.div
-              animate={{
-                scale: [1, 1.25, 1],
-                opacity: [0.15, 0.25, 0.15],
-                x: [0, 30, 0],
-                y: [0, -20, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
-              className="absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full bg-[#B77A45] blur-[140px]"
-            />
-            <motion.div
-              animate={{
-                scale: [1.2, 1, 1.2],
-                opacity: [0.1, 0.2, 0.1],
-                x: [0, -40, 0],
-                y: [0, 30, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
-              className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full bg-[#35150E] blur-[150px]"
-            />
-            <div 
-              className="absolute inset-0 opacity-[0.035] pointer-events-none"
-              style={{
-                backgroundImage: 'radial-gradient(#F5E9D8 1px, transparent 1px)',
-                backgroundSize: '28px 28px'
-              }}
-            />
-          </div>
+      <motion.div
+        key="luxury-welcome-curtain"
+        initial={{ y: 0 }}
+        animate={isWipingUp ? { y: '-100%', transition: { duration: 0.95, ease: [0.76, 0, 0.24, 1] } } : { y: 0 }}
+        exit={{ y: '-100%', transition: { duration: 0.95, ease: [0.76, 0, 0.24, 1] } }}
+        className="fixed inset-0 z-[99999] bg-[#29100B] text-[#FFFAF4] select-none flex flex-col justify-between overflow-hidden shadow-2xl"
+      >
+        {/* Ambient atmospheric liquid glow */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div
+            animate={{
+              scale: [1, 1.25, 1],
+              opacity: [0.15, 0.25, 0.15],
+              x: [0, 40, 0],
+              y: [0, -30, 0],
+            }}
+            transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
+            className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full bg-[#B77A45] blur-[150px]"
+          />
+          <div 
+            className="absolute inset-0 opacity-[0.035] pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(#F5E9D8 1px, transparent 1px)',
+              backgroundSize: '28px 28px',
+            }}
+          />
+        </div>
 
-          {/* Top Bar: Brand Association & Skip button */}
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
+        {/* Top Bar: Volga Life Biosciences identity & Skip */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-8 flex items-center justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="relative z-10 w-full max-w-6xl mx-auto flex items-center justify-between"
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#F5E9D8]/70 text-[10px] sm:text-xs uppercase tracking-widest font-semibold backdrop-blur-md">
-              <Sparkles className="w-3 h-3 text-[#B77A45]" />
-              <span>A Brand by Volga Life Biosciences</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#B77A45]" />
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-[#F5E9D8]/80">
+              A Brand by Volga Life Biosciences
+            </span>
+          </motion.div>
+
+          <button
+            onClick={triggerCurtainWipe}
+            className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#F5E9D8]/60 hover:text-white px-3.5 py-1.5 rounded-full border border-white/10 hover:border-white/30 bg-white/5 transition-all"
+          >
+            Skip &uarr;
+          </button>
+        </div>
+
+        {/* Center Stage: Logo, Tagline, Paragraph & Loading Bar */}
+        <div className="relative z-10 max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center my-auto space-y-6">
+          
+          {/* Official Mascot Logo with soft pulsing glow */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.88, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
+          >
+            <div className="absolute -inset-8 bg-[#B77A45]/20 rounded-full blur-3xl pointer-events-none" />
+            <img
+              src="/images/boop-logo-white.png"
+              alt="BOOP STORE"
+              className="h-24 sm:h-32 md:h-36 w-auto object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.8)] relative z-10"
+            />
+          </motion.div>
+
+          {/* Tagline */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="space-y-2"
+          >
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#FFFAF4]">
+              A Little Boop &amp; Lot of Love.
+            </h1>
+          </motion.div>
+
+          {/* Underneath: One-line paragraph requested by user */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="max-w-md mx-auto"
+          >
+            <p className="text-xs sm:text-sm text-[#F5E9D8]/80 uppercase tracking-widest font-light leading-relaxed">
+              Thoughtfully Curated. Genuinely Trusted. Made for Every Pet.
+            </p>
+          </motion.div>
+
+          {/* Preloader Counter & Glowing Progress Line */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="w-full max-w-xs mx-auto pt-4 space-y-3"
+          >
+            {/* Progress Percentage Display */}
+            <div className="flex items-center justify-between text-xs tracking-widest font-mono">
+              <span className="text-[#F5E9D8]/60 uppercase text-[10px]">
+                {progress < 40 ? 'Initializing Care...' : progress < 85 ? 'Curating Formulations...' : 'Welcome Aboard'}
+              </span>
+              <span className="text-caramel font-bold font-display text-sm">
+                {progress.toString().padStart(2, '0')}%
+              </span>
             </div>
 
-            <button
-              onClick={handleDismiss}
-              className="text-[10px] sm:text-xs uppercase tracking-widest text-[#F5E9D8]/70 hover:text-white transition-all py-1.5 px-4 rounded-full border border-white/10 hover:border-white/30 bg-white/5 backdrop-blur-md"
-            >
-              Skip Intro &rarr;
-            </button>
-          </motion.div>
-
-          {/* Center Cinematic Stage */}
-          <div className="relative z-10 max-w-2xl w-full mx-auto text-center flex flex-col items-center my-auto py-6 sm:py-8">
-            
-            {/* Logo with Soft Halo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="relative mb-6"
-            >
-              <div className="absolute -inset-6 bg-[#B77A45]/20 rounded-full blur-3xl pointer-events-none" />
-              <img
-                src="/images/boop-logo-white.png"
-                alt="BOOP STORE"
-                className="h-20 sm:h-28 md:h-32 w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] relative z-10"
+            {/* Glowing Golden Bar */}
+            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden p-0 relative">
+              <motion.div
+                className="h-full bg-gradient-to-r from-[#B77A45] via-[#F5E9D8] to-white rounded-full shadow-[0_0_12px_rgba(183,122,69,0.8)]"
+                style={{ width: `${progress}%` }}
+                transition={{ ease: 'linear' }}
               />
-            </motion.div>
+            </div>
 
-            {/* Hairline Divider */}
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.7 }}
-              className="w-16 h-px bg-gradient-to-r from-transparent via-[#B77A45] to-transparent my-2"
-            />
-
-            {/* Tagline */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-            >
-              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#FFFAF4]">
-                A Little Boop &amp; Lot of Love.
-              </h1>
-            </motion.div>
-
-            {/* Supporting Statement */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.85, duration: 0.8 }}
-              className="mt-3"
-            >
-              <p className="text-xs sm:text-sm text-[#F5E9D8]/80 uppercase tracking-widest font-light max-w-md mx-auto leading-relaxed">
-                Thoughtfully Curated. Genuinely Trusted. Made for Every Pet.
-              </p>
-            </motion.div>
-
-            {/* High-Fashion Editorial Photography Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 25 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full max-w-lg mx-auto my-6 sm:my-8 rounded-3xl overflow-hidden border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative group"
-            >
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#35150E]">
-                <img
-                  src="/images/hero-pets.jpg"
-                  alt="Golden Retriever and Companion Cat"
-                  className="w-full h-full object-cover object-center filter brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-1000"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#29100B]/90 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-left">
-                  <span className="text-[11px] font-semibold text-[#F5E9D8] tracking-wider uppercase">
-                    Companionship &bull; Nutrition &bull; Aquatics
-                  </span>
-                  <span className="text-[10px] text-white/60 tracking-widest uppercase">
-                    EST. 2026
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Action CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              className="w-full max-w-xs"
-            >
-              <button
-                onClick={handleDismiss}
-                className="w-full group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-xs uppercase tracking-ultra font-bold text-[#29100B] bg-gradient-to-r from-[#F5E9D8] via-white to-[#F5E9D8] hover:from-white hover:to-white shadow-[0_10px_30px_rgba(183,122,69,0.35)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-300"
+            {/* Interactive "Open Store" CTA when ready */}
+            {isReady && (
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                onClick={triggerCurtainWipe}
+                className="mt-3 inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#29100B] bg-[#F5E9D8] hover:bg-white shadow-[0_0_20px_rgba(245,233,216,0.6)] transition-all hover:scale-105 active:scale-95"
               >
-                <span>Explore The Collection</span>
-                <ArrowRight className="w-4 h-4 text-[#29100B] group-hover:translate-x-1.5 transition-transform duration-300" />
-              </button>
-            </motion.div>
-
-          </div>
-
-          {/* Bottom subtle assurance */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3, duration: 0.8 }}
-            className="relative z-10 text-[10px] uppercase tracking-widest text-[#F5E9D8]/50 pb-2"
-          >
-            PAN-INDIA DELIVERY &bull; 100% GENUINE BRANDS &bull; VOLGA LIFE SCIENTIFIC CARE
+                <span>Enter Store</span>
+                <ArrowUp className="w-3.5 h-3.5" />
+              </motion.button>
+            )}
           </motion.div>
-        </motion.div>
-      )}
+
+        </div>
+
+        {/* Bottom Curtain Wipe Hint */}
+        <div className="relative z-10 w-full text-center pb-8 flex flex-col items-center gap-1.5 text-[10px] tracking-ultra uppercase text-[#F5E9D8]/40">
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+          >
+            <ArrowUp className="w-4 h-4 text-caramel/70" />
+          </motion.div>
+          <span>Screen slides up to reveal homepage</span>
+        </div>
+
+      </motion.div>
     </AnimatePresence>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useShop } from '../../context/ShopContext';
-import { X, ShieldCheck, Truck, ArrowRight, Check } from 'lucide-react';
+import { X, ShieldCheck, Truck, ArrowRight, Check, Sparkles } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 export const CheckoutModal: React.FC = () => {
   const {
@@ -36,6 +37,18 @@ export const CheckoutModal: React.FC = () => {
     e.preventDefault();
     setStep('success');
     clearCart();
+
+    // Trigger celebration confetti
+    try {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#B77A45', '#35150E', '#F5E9D8', '#A6AD8A', '#06B6D4'],
+      });
+    } catch {
+      // ignore
+    }
   };
 
   const handleClose = () => {
@@ -59,7 +72,7 @@ export const CheckoutModal: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <ShieldCheck className="w-4 h-4 text-caramel" />
             <h3 className="font-display font-bold text-base text-chocolate uppercase tracking-wider">
-              {step === 'details' ? 'Secure Checkout' : 'Order Placed'}
+              {step === 'details' ? 'Secure Checkout' : 'Order Placed with Love ❤️'}
             </h3>
           </div>
           <button
@@ -148,12 +161,12 @@ export const CheckoutModal: React.FC = () => {
               {/* Payment Method simulation */}
               <div className="space-y-2">
                 <h4 className="text-[10px] font-bold text-chocolate uppercase tracking-ultra">
-                  Payment Method
+                  Payment Method (Simulated Frontend)
                 </h4>
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { id: 'upi', label: 'UPI / QR' },
-                    { id: 'card', label: 'Credit Card' },
+                    { id: 'upi', label: 'UPI / Instant QR' },
+                    { id: 'card', label: 'Credit/Debit Card' },
                     { id: 'cod', label: 'Cash on Delivery' },
                   ].map((pm) => (
                     <label
@@ -181,39 +194,39 @@ export const CheckoutModal: React.FC = () => {
               <div className="pt-4 border-t border-[#E8DBC9] flex items-center justify-between">
                 <div>
                   <p className="text-[10px] uppercase font-bold text-chocolate/50 tracking-wider">Total Amount</p>
-                  <p className="font-display font-black text-xl text-chocolate">
+                  <p className="font-display font-black text-2xl text-chocolate">
                     ₹{finalTotal.toLocaleString('en-IN')}
                   </p>
                 </div>
 
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-chocolate text-[#F5E9D8] hover:bg-chocolate-hover font-bold text-xs uppercase tracking-widest shadow-luxury transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-chocolate text-[#F5E9D8] hover:bg-chocolate-hover font-bold text-xs uppercase tracking-widest shadow-luxury transition-all hover:scale-105 active:scale-95"
                 >
-                  <span>Confirm Order</span>
+                  <span>Place Mock Order</span>
                   <ArrowRight className="w-4 h-4 text-caramel" />
                 </button>
               </div>
 
             </form>
           ) : (
-            <div className="py-12 text-center space-y-4">
+            <div className="py-10 text-center space-y-4">
               <div className="w-16 h-16 rounded-full bg-[#F5E9D8] text-chocolate flex items-center justify-center mx-auto shadow-subtle">
-                <Check className="w-7 h-7 text-caramel" />
+                <Check className="w-8 h-8 text-caramel" />
               </div>
 
-              <h3 className="font-display font-extrabold text-2xl text-chocolate">
-                Order Confirmed
+              <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-chocolate">
+                Order Received With Love ❤️
               </h3>
 
               <p className="text-sm text-chocolate/80 max-w-md mx-auto font-light leading-relaxed">
-                Order <span className="font-bold text-chocolate">#BP-{Math.floor(100000 + Math.random() * 900000)}</span> has been placed. A confirmation email has been dispatched to {formData.email}.
+                Order <span className="font-bold text-chocolate">#BOOP-{Math.floor(100000 + Math.random() * 900000)}</span> has been confirmed. Prepared with authentic care by Volga Life Biosciences.
               </p>
 
               <div className="p-4 bg-white rounded-xl border border-[#E8DBC9] max-w-md mx-auto text-left text-xs space-y-1.5 shadow-subtle">
                 <p><strong className="text-chocolate">Recipient:</strong> {formData.fullName}</p>
-                <p><strong className="text-chocolate">Destination:</strong> {formData.address}, {formData.city} - {formData.pincode}</p>
-                <p><strong className="text-chocolate">Logistics:</strong> Volga Life Pan-India Delivery</p>
+                <p><strong className="text-chocolate">Address:</strong> {formData.address}, {formData.city} - {formData.pincode}</p>
+                <p><strong className="text-chocolate">Logistics:</strong> Volga Life Express Dispatch</p>
               </div>
 
               <div className="pt-4">
@@ -221,7 +234,7 @@ export const CheckoutModal: React.FC = () => {
                   onClick={handleClose}
                   className="px-8 py-3 rounded-full bg-chocolate text-[#F5E9D8] text-xs font-bold uppercase tracking-wider hover:bg-chocolate-hover transition-colors shadow-subtle"
                 >
-                  Return to Store
+                  Continue Browsing
                 </button>
               </div>
             </div>
