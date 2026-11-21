@@ -26,7 +26,7 @@ export const MobileStoryBar: React.FC = () => {
             className="flex flex-col items-center gap-1.5 cursor-pointer select-none"
           >
             <div className="relative p-0.5 rounded-full bg-gradient-to-tr from-[#B77A45] via-[#E8DBC9] to-[#35150E]">
-              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white bg-[#F5E9D8]">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white bg-[#F5E9D8]">
                 <img
                   src={item.image}
                   alt={item.name}

@@ -7,109 +7,88 @@ export const PromoBanners: React.FC = () => {
   const { navigateToShopWithFilter } = useShop();
 
   return (
-    <section className="py-12 sm:py-20 bg-[#FFFAF4] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="py-6 sm:py-8 bg-[#FFFAF4]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
-        {/* On Mobile: Horizontal snap swipeable banners! On Desktop: 2-column grid */}
-        <div className="flex lg:grid lg:grid-cols-2 gap-6 sm:gap-8 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pb-4 lg:pb-0 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           
-          {/* Banner 1: Best Deals for Your Pets */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="snap-center flex-shrink-0 w-[85vw] sm:w-[450px] lg:w-auto relative rounded-3xl overflow-hidden border border-[#E8DBC9] bg-[#29100B] text-white p-7 sm:p-12 flex flex-col justify-between min-h-[340px] sm:min-h-[360px] group shadow-elevation"
-          >
-            {/* Background luxury photo */}
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/images/promo-dog-cat-hd.jpg"
-                alt="Companionship promotional campaign"
-                className="w-full h-full object-cover object-center opacity-40 group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-105"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#29100B] via-[#29100B]/85 to-transparent" />
-            </div>
+          {/* Banner 1: Best Deals for Your Pets! */}
+          <div className="relative rounded-2xl overflow-hidden bg-[#FBF1E4] border border-[#EADBCC] p-5 sm:p-6 flex items-center justify-between shadow-xs min-h-[170px] sm:min-h-[180px]">
+            
+            {/* Left Content */}
+            <div className="space-y-3 z-10 max-w-[210px] sm:max-w-[240px]">
+              <div className="flex items-center gap-2">
+                <h3 className="font-display font-extrabold text-lg sm:text-xl text-[#35150E] leading-tight">
+                  Best Deals <br />for Your Pets!
+                </h3>
+                {/* Red Discount Badge */}
+                <div className="w-11 h-11 rounded-full bg-[#E53E3E] text-white flex flex-col items-center justify-center text-[8px] font-bold uppercase leading-none shadow-sm flex-shrink-0">
+                  <span>Up to</span>
+                  <span className="text-[11px] font-black">30%</span>
+                  <span>OFF</span>
+                </div>
+              </div>
 
-            {/* Top Text Content */}
-            <div className="relative z-10 max-w-sm space-y-3">
-              <span className="inline-block px-3 py-1 rounded text-[10px] uppercase font-bold tracking-widest bg-white/10 border border-white/20 text-[#F5E9D8]">
-                Up to 30% OFF
-              </span>
-
-              <h3 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight leading-tight">
-                Best Deals for Your Pets!
-              </h3>
-
-              <p className="text-xs sm:text-sm text-[#F5E9D8]/80 font-light leading-relaxed">
-                Discover something special for your furry friends.
-              </p>
-            </div>
-
-            {/* Bottom CTA */}
-            <div className="relative z-10 pt-6">
               <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => navigateToShopWithFilter({ pet: 'All' })}
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#29100B] bg-white hover:bg-caramel hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white bg-[#3B160D] hover:bg-[#29100B] transition-all cursor-pointer shadow-2xs"
               >
                 <span>Shop Offers</span>
-                <ArrowRight className="w-4 h-4 text-[#29100B] group-hover:text-white group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-3 h-3" />
               </motion.button>
             </div>
-          </motion.div>
+
+            {/* Right Photo: Dog & Cat */}
+            <div className="w-32 sm:w-40 h-28 sm:h-36 relative flex-shrink-0 rounded-xl overflow-hidden">
+              <img
+                src="/images/promo-dog-cat-hd.jpg"
+                alt="Happy dog and cat"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+
+          </div>
 
           {/* Banner 2: New Arrivals */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="snap-center flex-shrink-0 w-[85vw] sm:w-[450px] lg:w-auto relative rounded-3xl overflow-hidden border border-[#E8DBC9] bg-[#35150E] text-white p-7 sm:p-12 flex flex-col justify-between min-h-[340px] sm:min-h-[360px] group shadow-elevation"
-          >
-            {/* Background luxury photo */}
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/images/promo-playful-cat-hd.jpg"
-                alt="Curated new arrivals"
-                className="w-full h-full object-cover object-center opacity-40 group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-105"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#35150E] via-[#35150E]/85 to-transparent" />
-            </div>
+          <div className="relative rounded-2xl overflow-hidden bg-[#F4F6F8] border border-[#DCE4EC] p-5 sm:p-6 flex items-center justify-between shadow-xs min-h-[170px] sm:min-h-[180px]">
+            
+            {/* Left Content */}
+            <div className="space-y-3 z-10 max-w-[210px] sm:max-w-[240px]">
+              <div>
+                <h3 className="font-display font-extrabold text-lg sm:text-xl text-[#1E293B] leading-tight">
+                  New Arrivals
+                </h3>
+                <p className="text-xs text-[#64748B] mt-1 font-normal">
+                  Curated Just for Your Furry Friends!
+                </p>
+              </div>
 
-            {/* Top Text Content */}
-            <div className="relative z-10 max-w-sm space-y-3">
-              <span className="inline-block px-3 py-1 rounded text-[10px] uppercase font-bold tracking-widest bg-white/10 border border-white/20 text-[#F5E9D8]">
-                Freshly Curated
-              </span>
-
-              <h3 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight leading-tight">
-                New Arrivals
-              </h3>
-
-              <p className="text-xs sm:text-sm text-[#F5E9D8]/80 font-light leading-relaxed">
-                Curated Just for Your Furry Friends!
-              </p>
-            </div>
-
-            {/* Bottom CTA */}
-            <div className="relative z-10 pt-6">
               <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => navigateToShopWithFilter({ pet: 'All' })}
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#35150E] bg-white hover:bg-caramel hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white bg-[#3B160D] hover:bg-[#29100B] transition-all cursor-pointer shadow-2xs"
               >
                 <span>Explore Now</span>
-                <ArrowRight className="w-4 h-4 text-[#35150E] group-hover:text-white group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-3 h-3" />
               </motion.button>
             </div>
-          </motion.div>
+
+            {/* Right Photo: Cat with Feather Toy */}
+            <div className="w-32 sm:w-40 h-28 sm:h-36 relative flex-shrink-0 rounded-xl overflow-hidden">
+              <img
+                src="/images/promo-cat-play-hd.jpg"
+                alt="Playful cat"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+
+          </div>
 
         </div>
+
       </div>
     </section>
   );

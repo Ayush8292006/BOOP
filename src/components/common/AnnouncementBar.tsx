@@ -7,7 +7,7 @@ export const AnnouncementBar: React.FC = () => {
 
   return (
     <div className="bg-[#29100B] text-[#F5E9D8] text-[11px] font-medium tracking-wider uppercase border-b border-[#35150E]/60 select-none">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-2 flex flex-wrap items-center justify-between gap-y-1">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-1.5 flex flex-wrap items-center justify-between gap-y-1">
         
         {/* Core Guarantees with minimalist line dividers */}
         <div className="flex flex-wrap items-center gap-x-6 sm:gap-x-8">

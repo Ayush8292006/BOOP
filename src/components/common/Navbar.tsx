@@ -124,10 +124,10 @@ export const Navbar: React.FC = () => {
           : 'bg-[#FFFAF4] border-b border-[#E8DBC9]/50'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
         {/* Main Header Bar */}
-        <div className="flex items-center justify-between h-20 sm:h-24 gap-6">
+        <div className="flex items-center justify-between h-16 sm:h-18 gap-4 sm:gap-6">
           
           {/* Mobile menu trigger */}
           <button

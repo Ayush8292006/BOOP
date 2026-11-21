@@ -7,49 +7,41 @@ export const CollabBanner: React.FC = () => {
   const { setContactModalOpen } = useShop();
 
   return (
-    <section className="py-12 sm:py-20 bg-[#FFFAF4] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="py-6 sm:py-8 bg-[#FFFAF4]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
-        {/* Elegant Architectural Banner with Scroll Reveal */}
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-3xl overflow-hidden bg-white border border-[#E8DBC9] p-8 sm:p-14 shadow-luxury"
-        >
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative z-10">
-            
-            {/* Left Content */}
-            <div className="max-w-2xl space-y-3">
-              <span className="text-[11px] uppercase tracking-ultra font-semibold text-caramel block">
-                Partnerships &amp; Inquiries
-              </span>
-              <h3 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-chocolate tracking-tight">
+        {/* Soft Sky Blue Rounded Banner - Directly Matching Reference Image 1 */}
+        <div className="relative rounded-2xl overflow-hidden bg-[#E2F4FA] border border-[#C5E6F2] p-5 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xs">
+          
+          {/* Left: Cute Puppy Icon & Heading */}
+          <div className="flex items-center gap-3 sm:gap-4 text-center md:text-left">
+            <span className="text-3xl sm:text-4xl hidden sm:inline select-none">🐶</span>
+            <div>
+              <h3 className="font-display font-extrabold text-base sm:text-lg text-[#164E63] leading-tight">
                 For Queries &amp; Collaborations
               </h3>
-              <p className="text-xs sm:text-sm text-chocolate/75 leading-relaxed font-light">
+              <p className="text-xs text-[#0E7490] mt-1 font-normal max-w-md">
                 Reach out to us for product enquiries, business collaborations, or partnership opportunities.
               </p>
             </div>
-
-            {/* Right Action */}
-            <div className="flex items-center gap-4 flex-shrink-0">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => setContactModalOpen(true)}
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest text-[#F5E9D8] bg-chocolate hover:bg-chocolate-hover shadow-luxury transition-all duration-300"
-              >
-                <Mail className="w-4 h-4 text-caramel" />
-                <span>Drop Us an Email</span>
-                <ArrowRight className="w-4 h-4 text-caramel group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-            </div>
-
           </div>
 
-        </motion.div>
+          {/* Right: Drop us an Email Button & Cat */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setContactModalOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-[#3B160D] hover:bg-[#29100B] shadow-2xs transition-all cursor-pointer"
+            >
+              <Mail className="w-3.5 h-3.5" />
+              <span>Drop us an Email</span>
+              <ArrowRight className="w-3 h-3" />
+            </motion.button>
+            <span className="text-3xl sm:text-4xl hidden sm:inline select-none">🐱</span>
+          </div>
+
+        </div>
 
       </div>
     </section>
