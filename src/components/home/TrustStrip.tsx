@@ -31,21 +31,21 @@ export const TrustStrip: React.FC = () => {
   ];
 
   return (
-    <section className="bg-white border-y border-[#EADBCC] py-3 sm:py-3.5">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
+    <section className="bg-white border-y border-[#EADBCC] py-4 sm:py-5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6">
           {benefits.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
                 onClick={item.onClick}
-                className={`flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-[#35150E] ${
+                className={`flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#35150E] ${
                   item.onClick ? 'cursor-pointer hover:text-[#B77A45]' : ''
                 } transition-colors`}
               >
-                <div className="w-6 h-6 rounded-full bg-[#FAF3EA] flex items-center justify-center text-[#35150E] flex-shrink-0">
-                  <Icon className="w-3.5 h-3.5" />
+                <div className="w-8 h-8 rounded-full bg-[#FAF3EA] flex items-center justify-center text-[#35150E] flex-shrink-0">
+                  <Icon className="w-4 h-4" />
                 </div>
                 <span>{item.title}</span>
               </div>

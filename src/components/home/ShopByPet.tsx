@@ -44,12 +44,12 @@ export const ShopByPet: React.FC = () => {
   ];
 
   return (
-    <section id="shop-by-pet-section" className="py-8 sm:py-10 bg-[#FFFAF4]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <section id="shop-by-pet-section" className="py-10 sm:py-14 bg-[#FFFAF4]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Heading with Cute Paw Prints */}
-        <div className="text-center mb-5 sm:mb-6">
-          <h2 className="font-display font-extrabold text-xl sm:text-2xl text-[#35150E] flex items-center justify-center gap-2">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#35150E] flex items-center justify-center gap-2">
             <span>🐾</span>
             <span>Shop by Pet</span>
             <span>🐾</span>
@@ -57,17 +57,17 @@ export const ShopByPet: React.FC = () => {
         </div>
 
         {/* 5 Compact Friendly Pastel Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {petCards.map((pet, idx) => (
             <motion.div
               key={idx}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigateToShopWithFilter({ pet: pet.id as any })}
-              className={`${pet.bgColor} rounded-2xl p-3 sm:p-3.5 flex flex-col items-center justify-between text-center cursor-pointer shadow-sm hover:shadow transition-all border border-black/5`}
+              className={`${pet.bgColor} rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-between text-center cursor-pointer shadow-sm hover:shadow-md transition-all border border-black/5`}
             >
-              {/* Pet Image: Small & Compact */}
-              <div className="w-full max-w-[120px] aspect-square rounded-xl overflow-hidden mb-2.5 bg-white/40">
+              {/* Pet Image: Clean Frame */}
+              <div className="w-full aspect-square rounded-2xl overflow-hidden mb-3.5 bg-white/40">
                 <img
                   src={pet.image}
                   alt={pet.name}
@@ -77,7 +77,7 @@ export const ShopByPet: React.FC = () => {
               </div>
 
               {/* Pet Title */}
-              <h3 className={`font-display font-bold text-xs sm:text-sm ${pet.textColor}`}>
+              <h3 className={`font-display font-bold text-sm sm:text-base ${pet.textColor}`}>
                 {pet.name}
               </h3>
             </motion.div>

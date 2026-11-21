@@ -7,18 +7,18 @@ export const AquaticSection: React.FC = () => {
   const { navigateToShopWithFilter } = useShop();
 
   return (
-    <section className="py-3 sm:py-4 bg-[#FFFAF4]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <section className="py-4 sm:py-6 bg-[#FFFAF4]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Slim, Sleek Aquatic Strip - Directly matching Reference Image 1 */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#031E2A] via-[#053246] to-[#042838] border border-[#0E7490]/40 shadow-sm px-4 sm:px-6 py-3 sm:py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-white">
+        {/* Sleek Aquatic Strip - Inspired directly by Reference Image 1 */}
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#031E2A] via-[#053A52] to-[#032230] border border-[#0E7490]/40 shadow-sm px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-white">
           
           {/* Left: Pill Button */}
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => navigateToShopWithFilter({ pet: 'Aquatics' as any })}
-            className="flex items-center gap-2 bg-white text-[#031E2A] hover:bg-[#F5E9D8] px-4 py-2 rounded-full text-xs font-bold shadow-sm transition-all flex-shrink-0"
+            className="flex items-center gap-2.5 bg-white text-[#031E2A] hover:bg-[#F5E9D8] px-5 py-2.5 rounded-full text-xs font-bold shadow-sm transition-all flex-shrink-0 cursor-pointer"
           >
             <span>Explore Our Aquatic Range</span>
             <div className="w-4 h-4 rounded-full bg-[#031E2A] text-white flex items-center justify-center">
@@ -27,20 +27,20 @@ export const AquaticSection: React.FC = () => {
           </motion.button>
 
           {/* Center: Tagline */}
-          <div className="text-[11px] sm:text-xs text-[#E0F2FE] font-medium tracking-wide text-center sm:text-left">
+          <div className="text-xs sm:text-sm text-[#E0F2FE] font-medium tracking-wide text-center">
             <span>Beautiful Fish</span>
-            <span className="mx-2 text-[#38BDF8]/60">|</span>
+            <span className="mx-3 text-[#38BDF8]/60">|</span>
             <span>Premium Products</span>
-            <span className="mx-2 text-[#38BDF8]/60">|</span>
+            <span className="mx-3 text-[#38BDF8]/60">|</span>
             <span>Healthy Ecosystems</span>
           </div>
 
-          {/* Right: Small swimming fish graphic */}
-          <div className="w-12 h-10 sm:w-16 sm:h-12 relative flex-shrink-0 overflow-hidden rounded-lg">
+          {/* Right: Glowing Neon Fish Graphic */}
+          <div className="w-16 h-12 sm:w-20 sm:h-14 relative flex-shrink-0 overflow-hidden rounded-xl">
             <img
               src="/images/aquatic-closeup.jpg"
               alt="Aquatic Fish"
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-cover rounded-xl"
             />
           </div>
 

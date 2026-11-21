@@ -9,80 +9,80 @@ export const ShopByCategory: React.FC = () => {
     {
       id: 'Food & Treats',
       name: 'Food & Treats',
-      image: '/images/prod-kibble.jpg',
+      image: '/images/cat-food-treats.png',
     },
     {
       id: 'Toys & Play',
       name: 'Toys & Play',
-      image: '/images/prod-cat-toy.jpg',
+      image: '/images/cat-toys-play.png',
     },
     {
       id: 'Collars & Leashes',
       name: 'Collars & Leashes',
-      image: '/images/prod-collar.jpg',
+      image: '/images/cat-collars-leashes.png',
     },
     {
       id: 'Grooming & Hygiene',
       name: 'Grooming & Hygiene',
-      image: '/images/prod-grooming.jpg',
+      image: '/images/cat-grooming-hygiene.png',
     },
     {
       id: 'Travel & Carriers',
       name: 'Travel & Carriers',
-      image: '/images/pet-cat-hd.jpg',
+      image: '/images/cat-travel-carriers.png',
     },
     {
       id: 'Beds & Comfort',
       name: 'Beds & Comfort',
-      image: '/images/prod-bed.jpg',
+      image: '/images/cat-beds-comfort.png',
     },
     {
       id: 'Health & Wellness',
       name: 'Health & Wellness',
-      image: '/images/pet-reptile-hd.jpg',
+      image: '/images/cat-health-wellness.png',
     },
     {
       id: 'Enrichment & More',
       name: 'Enrichment & More',
-      image: '/images/prod-bird-cage.jpg',
+      image: '/images/cat-enrichment-more.png',
     },
   ];
 
   return (
-    <section className="py-8 sm:py-10 bg-[#FFFAF4]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <section className="py-10 sm:py-14 bg-[#FFFAF4]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Heading with Cute Paw Prints */}
-        <div className="text-center mb-5 sm:mb-6">
-          <h2 className="font-display font-extrabold text-xl sm:text-2xl text-[#35150E] flex items-center justify-center gap-2">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#35150E] flex items-center justify-center gap-2">
             <span>🐾</span>
             <span>Shop by Category</span>
             <span>🐾</span>
           </h2>
         </div>
 
-        {/* 8 Compact Category Tiles (4 cols on mobile, 8 cols on desktop) */}
-        <div className="grid grid-cols-4 lg:grid-cols-8 gap-2.5 sm:gap-3">
+        {/* 8 Compact Category Tiles directly matching Reference Image 1 */}
+        <div className="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
           {categories.map((cat, idx) => (
             <motion.div
               key={cat.id}
-              whileHover={{ y: -3, transition: { duration: 0.15 } }}
+              whileHover={{ y: -4, transition: { duration: 0.15 } }}
               whileTap={{ scale: 0.97 }}
               onClick={() => navigateToShopWithFilter({ category: cat.id as any })}
-              className="bg-[#FAF3EA] hover:bg-[#F3E7D7] rounded-xl p-2.5 sm:p-3 flex flex-col items-center text-center cursor-pointer border border-[#EADBCC] shadow-xs transition-colors"
+              className="bg-[#FAF3EA] hover:bg-[#F3E7D7] rounded-2xl p-3 sm:p-4 flex flex-col items-center text-center cursor-pointer border border-[#EADBCC] shadow-xs transition-colors"
             >
-              {/* Compact Image */}
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden mb-2 bg-white flex items-center justify-center shadow-2xs">
+              {/* Category Icon from Reference */}
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden mb-2.5 bg-white flex items-center justify-center p-2 shadow-2xs">
                 <img
                   src={cat.image}
                   alt={cat.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </div>
 
               {/* Title */}
-              <h3 className="font-display font-bold text-[10px] sm:text-[11px] text-[#35150E] leading-tight line-clamp-2">
+              <h3 className="font-display font-bold text-xs sm:text-[13px] text-[#35150E] leading-tight">
                 {cat.name}
               </h3>
             </motion.div>
